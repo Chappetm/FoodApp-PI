@@ -8,5 +8,25 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    resume: {
+      type: DataTypes.TEXT
+    },
+    score: {
+      type: DataTypes.INTEGER
+    },
+    healthScore: {
+      type: DataTypes.INTEGER
+    },
+    instruction: {
+      type: DataTypes.TEXT
+    }
   });
 };
+
+
+// ID: *
+// Nombre *
+// Resumen del plato *
+// Puntuación
+// Nivel de "comida saludable"
+// Paso a paso
