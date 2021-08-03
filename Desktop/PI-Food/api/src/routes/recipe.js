@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
     // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
     // Si no existe ninguna receta mostrar un mensaje adecuado
     const { name } = req.query;
-    //Version con query name
+    //-------------Version con query name--------------------------
     if(name){
         const respDb = await Recipe.findAll({    //Busca en el model 'Recipe'
             where: {
@@ -21,7 +21,13 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
         })
         
         const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true`) //Buena en la api con el query 'name'
-        res.status(200).send(respDb.concat(respApi.data.results));   //Devuelve los arreglos concatenados
+
+        const respTotal = respDb.concat(respApi.data.results);
+        if(respTotal.length){
+            res.status(200).send(respTotal);   //Devuelve los arreglos concatenados
+        } else{
+            res.status(400).send('No existe receta relacionada')
+        }
 
     } else {
         const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true`)
@@ -32,6 +38,9 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
 })
 
 router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
+    // Obtener el detalle de una receta en particular
+    // Debe traer solo los datos pedidos en la ruta de detalle de receta
+    // Incluir los tipos de dieta asociados
     const { id } = req.params;
 
 })  
