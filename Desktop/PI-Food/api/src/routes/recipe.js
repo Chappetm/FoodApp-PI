@@ -13,15 +13,21 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
     const { name } = req.query;
     //Version con query name
     if(name){
-        const respDb = await Recipe.findAll({
+        const respDb = await Recipe.findAll({    //Busca en el model 'Recipe'
             where: {
-                title: {[Op.substring]: name}
+                name: {[Op.substring]: name}    //En la columna name debe estar el 'name'
             }, 
-            include: [Diet]
+            include: [Diet]                      //Join con el model 'Diet'
         })
         
-        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true`)
+        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true`) //Buena en la api con el query 'name'
+        res.status(200).send(respDb.concat(respApi.data.results));   //Devuelve los arreglos concatenados
+
+    } else {
+        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true`)
+        res.status(200).send(respApi.data.results); //Si no pasan un 'name' por query, responde con las 10 primeras recetas
     }
+    //----------------------------------------------------
 
 })
 
