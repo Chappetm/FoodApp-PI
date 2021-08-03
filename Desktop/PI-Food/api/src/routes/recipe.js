@@ -1,7 +1,7 @@
 const { Router, request } = require('express');
 const { Recipe, Diet } = require('../db');
 const { Op } = require('sequelize');
-const { API_KEY, URL_RECIPES } = process.env
+const { API_KEY, URL_RECIPES, URL_ID } = process.env
 const axios = require('axios');
 
 const router = Router();
@@ -23,10 +23,11 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
         const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true`) //Buena en la api con el query 'name'
 
         const respTotal = respDb.concat(respApi.data.results);
+
         if(respTotal.length){
             res.status(200).send(respTotal);   //Devuelve los arreglos concatenados
         } else{
-            res.status(400).send('No existe receta relacionada')
+            res.status(400).send('No existe receta relacionada')  //Devuelve error 
         }
 
     } else {
@@ -42,6 +43,34 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
     // Debe traer solo los datos pedidos en la ruta de detalle de receta
     // Incluir los tipos de dieta asociados
     const { id } = req.params;
+    if(id.length < 10){
+        const response = await axios.get(`${URL_ID}${id}/information?${API_KEY}`)
+        const finalResponse = response.data;
+        console.log(response)
+        
+        const idRecipe = {
+            id: finalResponse.id,
+            title: finalResponse.title,
+            image: finalResponse.image,
+            diets: finalResponse.diets,
+            dishTypes: finalResponse.dishTypes,
+            summary: finalResponse.summary,
+            healthScore: finalResponse.healthScore,
+            spoonacularScore: finalResponse.spoonacularScore,
+            analyzedInstructions: (finalResponse.analyzedInstructions.length > 0) ? finalResponse.analyzedInstructions[0].steps.map(e => e.step) : "No se encontraron datos"
+            //Comprobamos si tiene instrucciones, si las tiene entramos al obj ([0]) y a la propiedad 'steps' para mapearla y conseguir todos los pasos ('step'). Si no las tiene se llena con 'no hay datos'
+        }
+        res.status(200).send(idRecipe)
+    } else {
+        const response = await Recipe.findAll({
+            where: {
+                id: id
+            },
+            include: Diet
+        })
+
+        res.status(200).send(response)
+    }
 
 })  
 
