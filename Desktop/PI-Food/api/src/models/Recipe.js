@@ -6,24 +6,25 @@ module.exports = (sequelize) => {
   sequelize.define('recipe', {
     id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    resume: {
+    summary: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    score: {
+    spoonacularScore: {
       type: DataTypes.INTEGER
     },
     healthScore: {
       type: DataTypes.INTEGER
     },
-    instruction: {
+    analyzedInstructions: {
       type: DataTypes.TEXT
     }
   });

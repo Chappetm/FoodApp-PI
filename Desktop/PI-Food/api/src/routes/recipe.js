@@ -1,4 +1,4 @@
-const { Router, request } = require('express');
+const { Router } = require('express');
 const { Recipe, Diet } = require('../db');
 const { Op } = require('sequelize');
 const { API_KEY, URL_RECIPES, URL_ID } = process.env
@@ -80,16 +80,15 @@ router.post('/', async (req, res) => {    //POST /recipe
     if(title && summary){   //Posiblemente se pueda reemplazar con TRY CATCH
         const [newRecipe, success] = await Recipe.findOrCreate({
             where: {title},
-            default: {
+            defaults: {
                 title,
                 summary,
                 spoonacularScore,
                 healthScore,
-                analyzedInstructions,
-                diets
+                analyzedInstructions
             }
         })
-
+            //FALTA DIET!!!! (setDiet)
         if(success){
             res.status(200).send(newRecipe)
         } else {
