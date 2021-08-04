@@ -75,7 +75,29 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
 })  
 
 router.post('/', async (req, res) => {    //POST /recipe
+    const { title, summary, spoonacularScore, healthScore, analyzedInstructions, diets } = req.body;
 
+    if(title && summary){   //Posiblemente se pueda reemplazar con TRY CATCH
+        const [newRecipe, success] = await Recipe.findOrCreate({
+            where: {title},
+            default: {
+                title,
+                summary,
+                spoonacularScore,
+                healthScore,
+                analyzedInstructions,
+                diets
+            }
+        })
+
+        if(success){
+            res.status(200).send(newRecipe)
+        } else {
+            res.status(400).send("Dieta existente")
+        }
+    } else { 
+        res.status(404).send('Error') 
+    }
 })
 
 module.exports = router;
