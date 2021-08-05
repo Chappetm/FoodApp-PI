@@ -1,7 +1,7 @@
 import { GET_RECIPES } from ".";
 import axios from "axios";
 
-export default function GET_RECIPES(name){
+export default function getRecipes(name){
     return async function(dispatch){
         if(name){
             const response = await axios.get(`http://localhost:3001/recipe/${name}`);
