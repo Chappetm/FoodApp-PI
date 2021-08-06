@@ -11,6 +11,7 @@ export default function Nav(props){
     `
     const H2 = styled.h2`
         color: orange;
+        font-family: 'Pacifico'
     `
     return (
         <Navi>

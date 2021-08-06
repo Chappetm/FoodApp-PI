@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import React from 'react';
 import Landing from './components/Landing/Landing'
 import Home from './components/Home/Home';
+import Detail from './components/Detail/Detail';
 
 function App() {
 
@@ -13,6 +14,9 @@ function App() {
       </Route>
       <Route exact path='/home'>
         <Home />
+      </Route>
+      <Route exact path='/detail/:id'>
+        <Detail />
       </Route>
     </React.Fragment>
   );
