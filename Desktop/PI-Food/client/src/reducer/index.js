@@ -1,4 +1,4 @@
-import GET_RECIPES from "../actions/getRecipes"
+import { GET_RECIPES } from "../actions"
 
 const initialState = {
     recipesLoaded: []

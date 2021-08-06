@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer'
 import styled from 'styled-components'
 import getRecipes from '../../actions/getRecipes'
 import { connect, useDispatch } from 'react-redux'
+import axios from 'axios'
 
 export default function Home(props){
     const Body = styled.div`
@@ -26,7 +27,6 @@ export default function Home(props){
     //     console.log('entro')
     //     getRecipes()
     // }, [])
-
 
     return (
         <Body>
