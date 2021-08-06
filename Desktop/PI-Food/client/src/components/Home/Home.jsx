@@ -3,6 +3,8 @@ import Nav from '../Nav/Nav'
 import Cards from '../Cards/Cards'
 import Footer from '../Footer/Footer'
 import styled from 'styled-components'
+import getRecipes from '../../actions/getRecipes'
+import { connect, useDispatch } from 'react-redux'
 
 export default function Home(props){
     const Body = styled.div`
@@ -12,12 +14,19 @@ export default function Home(props){
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
     `
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('hola')
-    }, [])
+        console.log('entre al useEffect')
+        dispatch(getRecipes());
+    }, []);
+
+    // useEffect(() => {
+    //     console.log('entro')
+    //     getRecipes()
+    // }, [])
+
 
     return (
         <Body>
@@ -27,3 +36,5 @@ export default function Home(props){
         </Body>
     )
 }
+
+// export default connect(null, { getRecipes })(Home)

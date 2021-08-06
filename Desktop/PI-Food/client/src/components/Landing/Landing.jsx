@@ -22,7 +22,7 @@ export default function Landing(props){
     
     const H3 = styled(Link)`
         font-size: 30px;
-        margin-top: 200px;
+        margin-top: 250px;
         padding: 10px;
         text-decoration: none;
         color: orange;
