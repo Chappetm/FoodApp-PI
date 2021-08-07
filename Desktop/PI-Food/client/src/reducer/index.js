@@ -1,7 +1,8 @@
 import { GET_QUERY, GET_RECIPES } from "../actions"
 
 const initialState = {
-    recipesLoaded: []
+    recipesLoaded: [],
+    recipeDetail: []
 }
 
 export default function reducer(state = initialState, action){

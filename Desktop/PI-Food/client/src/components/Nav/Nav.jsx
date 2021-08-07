@@ -7,15 +7,20 @@ export default function Nav(props){
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        align-items: center;
         background-color: lightgray;
+        height: 15%
     `
     const H2 = styled.h2`
         color: orange;
-        font-family: 'Pacifico'
-    `
+        font-family: 'Raleway';
+        font-size: 50px;
+        margin: 0;
+        padding: 0;
+    `;
     return (
         <Navi>
-            <H2>Comidaaaaaa</H2>
+            <H2>FOODAPP</H2>
             <SearchBar />
         </Navi>
     )

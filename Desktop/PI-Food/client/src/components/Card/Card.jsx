@@ -19,6 +19,8 @@ const Cardiv = styled.div`
     const Diet = styled.div`
         width: 100%;
         box-sizing:border-box;
+        font-family: 'Raleway';
+        text-transform: capitalize;
     `;
     const H3 = styled(Link)`
         margin: 10px;
@@ -27,6 +29,7 @@ const Cardiv = styled.div`
         color: black;
         font-size: 20px;
         font-weight: 700;
+        font-family: 'Raleway';
     `;
     
     const DivImg = styled.div`

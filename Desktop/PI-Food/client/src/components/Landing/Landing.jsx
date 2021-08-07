@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import background from '../../background.jpg'
+import video1 from '../../background.mp4'
+import video2 from '../../background2.mp4'
 
 export default function Landing(props){
     const Body = styled.div`
-        background-image: url(${background});
         background-size: cover;
         margin: 0;
         padding: 0;
         height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -24,6 +25,7 @@ export default function Landing(props){
         font-size: 30px;
         padding: 10px;
         text-decoration: none;
+        position: relative;
         color: orange;
         background-color: rgba(0,0,0,0.5) ;
         border-radius: 7px;
@@ -36,13 +38,22 @@ export default function Landing(props){
 
     const Titulo = styled.div`
         background-color: rgba(0,0,0,0.5);
-        border-radius: 30px;
-        width: 50%;
-        height: 50%;
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
+        position: relative;
+    `;
+
+    const Titulo2 = styled.div`
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        position: relative;
+        height: 100%;
     `;
 
     const Welcome = styled.h1`
@@ -78,16 +89,46 @@ export default function Landing(props){
         align-items: center;
     `;
 
+    const ContenedorVideo = styled.div`
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    `;
+
+    const Videox = styled.video`
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    `;
+
+    const Boton = styled.div`
+        height: 70%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+
     return (
         <Body>
+            <ContenedorVideo>
+                <Videox muted autoPlay loop>
+                    {/* <source src={video1} type="video/mp4"/> */}
+                    <source src={video2} type="video/mp4"/>
+                </Videox>
+            </ContenedorVideo>
             <Titulo>
-                <Welcome>Welcome to</Welcome>
-                <Hcontenedor>
-                    <H1>FOOD</H1>
-                    <H2>APP</H2>
-                </Hcontenedor>
+                <Titulo2>
+                    <Welcome>Welcome To</Welcome>
+                    <Hcontenedor>
+                        <H1>FOOD</H1>
+                        <H2>APP</H2>
+                    </Hcontenedor>
+                </Titulo2>
+                <Boton>
+                    <H3 to='/home'>Find Your Recipe</H3>
+                </Boton>
             </Titulo>
-            <H3 to='/home'>Find Your Recipe</H3>
         </Body>
     )
 }
