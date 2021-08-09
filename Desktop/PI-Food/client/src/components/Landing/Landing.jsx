@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import video1 from '../../background.mp4'
 import video2 from '../../background2.mp4'
 
-export default function Landing(props){
-    const Body = styled.div`
+//Styled-components
+
+const Body = styled.div`
         background-size: cover;
         margin: 0;
         padding: 0;
@@ -108,6 +109,10 @@ export default function Landing(props){
         justify-content: center;
         align-items: center;
     `;
+//-----------------------------------------
+
+export default function Landing(props){
+    
 
     return (
         <Body>

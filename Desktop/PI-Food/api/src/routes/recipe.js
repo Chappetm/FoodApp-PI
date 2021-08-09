@@ -15,14 +15,13 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
     if(name){
         const respDb = await Recipe.findAll({    //Busca en el model 'Recipe'
             where: {
-                name: {[Op.substring]: name}    //En la columna name debe estar el 'name'
+                title: {[Op.substring]: name}    //En la columna name debe estar el 'name'
             }, 
             include: [Diet]                      //Join con el model 'Diet'
         })
         
-        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true`) //Buena en la api con el query 'name'
-
-        const respTotal = respDb.concat(respApi.data.results);
+        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true`) //Busca en la api con el query 'name'
+        const respTotal = respDb.concat(respApi.data.results).slice(0, 9)
 
         if(respTotal.length){
             res.status(200).send(respTotal);   //Devuelve los arreglos concatenados
@@ -32,9 +31,10 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
 
     } else {
         const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true`)
-        res.status(200).send(respApi.data.results); //Si no pasan un 'name' por query, responde con las 10 primeras recetas
+        const result = respApi.data.results.slice(0, 9)
+        res.status(200).send(result); //Si no pasan un 'name' por query, responde con las 10 primeras recetas
     }
-    //----------------------------------------------------
+    //---------------------------------------------------
 
 })
 
@@ -78,22 +78,23 @@ router.post('/', async (req, res) => {    //POST /recipe
     const { title, summary, spoonacularScore, healthScore, analyzedInstructions, diets } = req.body;
 
     if(title && summary){   //Posiblemente se pueda reemplazar con TRY CATCH
-        const [newRecipe, success] = await Recipe.findOrCreate({
-            where: {title},
-            defaults: {
+        const newRecipe = await Recipe.create({
                 title,
                 summary,
                 spoonacularScore,
                 healthScore,
                 analyzedInstructions
-            }
         })
-            //FALTA DIET!!!! (setDiet)
-        if(success){
-            res.status(200).send(newRecipe)
-        } else {
-            res.status(400).send("Dieta existente")
-        }
+        
+        const dietsDB = await Diet.findAll({
+            where: {name: diets}
+        })
+
+        await newRecipe.addDiet(dietsDB); 
+
+       
+        res.status(200).send(newRecipe)
+        
     } else { 
         res.status(404).send('Error') 
     }
