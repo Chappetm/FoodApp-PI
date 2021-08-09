@@ -9,7 +9,38 @@ const Search = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
-    `
+        width: 50%;
+        height: 100%;
+`;
+
+const Bar = styled.input`
+    width: 200px;
+    height: 30px;
+    margin: 10px;
+    background-color: #141414;
+    border: 0.5px #f07b3f solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'Raleway';
+    color: #f07b3f;
+    outline: none;
+`;
+
+const Find = styled.input`
+    height: 40px;
+    width: 50px;
+    border-radius: 5px;
+    font-family: 'Raleway';
+    background-color: #141414;
+    border-color: f07b3f;
+    color: gray;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        border: 0.5px #f07b3f solid;
+    }
+`;
 //-------------------------------
 
 export default function SearchBar(){
@@ -31,13 +62,13 @@ export default function SearchBar(){
             <form 
             onSubmit={(e) => handleSubmit(e)}
             >
-                <input 
+                <Bar 
                     type="text"
                     placeholder="Find your recipe" 
                     value={recipe}
                     onChange={(e) => handleChange(e)}
                 />
-                <input type="submit" value='Find' />
+                <Find type="submit" value='Find' />
             </form>
         </Search>
             

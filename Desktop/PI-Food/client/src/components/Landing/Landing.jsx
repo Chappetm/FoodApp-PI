@@ -18,7 +18,7 @@ const Body = styled.div`
         justify-content: space-around;
         transition: all 0.5s ease-in-out;
         &:hover{
-            background-color: orange;
+            background-color: #f07b3f;
         }
     `;
     
@@ -27,7 +27,7 @@ const Body = styled.div`
         padding: 10px;
         text-decoration: none;
         position: relative;
-        color: orange;
+        color: #f07b3f;
         background-color: rgba(0,0,0,0.5) ;
         border-radius: 7px;
         transition: all 0.3s ease-in-out;

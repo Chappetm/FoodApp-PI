@@ -6,15 +6,21 @@ import styled from 'styled-components'
 import getRecipes from '../../actions/getRecipes'
 import { useDispatch } from 'react-redux'
 
-export default function Home(props){
-    const Body = styled.div`
+//Styled-components
+
+const Body = styled.div`
         height: 100%;
         width: 100%;
         position: relative;
-        display: flex;
+        display: grid;
         flex-direction: column;
         justify-content: space-between;
     `
+
+//-----------------------------------------
+
+export default function Home(props){
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,10 +28,12 @@ export default function Home(props){
     }, []);
 
     return (
-        <Body>
+        <div>
             <Nav />
-            <Cards />
+            <Body>
+                <Cards />
+            </Body>
             <Footer />
-        </Body>
+        </div>
     )
 }
