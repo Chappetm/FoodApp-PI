@@ -48,14 +48,15 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-    width: 40%;
+    width: 80%;
+    height: 35px;
     box-shadow: 5px 5px 20px lightgray;
     border-radius: 3px;
 `;
 
 const InputTwo = styled.input`
-    width: 40%;
-    height: 10%;
+    width: 80%;
+    height: 80px;
     box-shadow: 5px 5px 20px lightgray;
     border-radius: 3px;
     padding: 0;
@@ -108,7 +109,11 @@ const DivRow = styled.div`
 
 const Div1 = styled.div`
     width: 50%;
-    height: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 `;
 
 //------------------------------------------------
