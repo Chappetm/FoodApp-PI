@@ -3,19 +3,26 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import Card from '../Card/Card'
 
-export default function Cards(){
-    const Body = styled.div`
+//Styled-Components
+
+const Body = styled.div`
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center
+        justify-content: center;
     `;
+
+//----------------------------------------
+
+export default function Cards({currentRecipes}){
+    
     const recipes = useSelector(store => store.recipesLoaded)
+    
 
     return (
         <Body>
             {
-                recipes.map(r => <Card 
+                currentRecipes.map(r => <Card 
                     title={r.title}
                     image={r.image}
                     diet={r.diets}
