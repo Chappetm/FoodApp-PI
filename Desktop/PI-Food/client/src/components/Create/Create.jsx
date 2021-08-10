@@ -98,6 +98,8 @@ const DivButton = styled.div`
     justify-content: center;
 `;
 
+//------------------------------------------------
+
 export default function Create(params) {
     const [ info, setInfo ] = useState({
         title: '',
@@ -117,6 +119,21 @@ export default function Create(params) {
         dispatch(getDiets())
     }, [])
 
+    const validate = (value, type) => {
+        switch(type){
+            case 'title':
+                // if(){
+
+                // } else {
+                    
+                // }
+            case 'summary':
+            case 'score':
+            case 'healthScore':
+            case 'steps':
+        }
+    }
+
     const handleDiets = (e) => {
         if(!info.diets.includes(e.target.value)){
             setInfo({
@@ -130,6 +147,14 @@ export default function Create(params) {
         e.preventDefault()
         dispatch(createRecipe(info));
         alert('Recipe created')
+        setInfo({
+            title: '',
+            summary: '',
+            score: '',
+            healthScore: '',
+            steps: '',
+            diets: []
+        })
     }
 
     return (
@@ -139,10 +164,10 @@ export default function Create(params) {
                 <H1>Create Recipe</H1>
                 <Form onSubmit={(e) => handleSubmit(e)} >
                     <Label>Recipe name:</Label>
-                    <Input type="text" value={info.title} />
+                    <Input type="text" value={info.title} onChange={(e) => validate(e.target.value, 'title')}/>
                     <br />
                     <Label>Summary:</Label>
-                    <InputTwo type="text" value={info.summary} />
+                    <InputTwo type="text" value={info.summary} onChange={(e) => validate(e.target.value, 'summary')}/>
                     <br />
                     <Label>Diet:</Label>
                     <Select onChange={(e) => handleDiets(e)}>
@@ -154,13 +179,13 @@ export default function Create(params) {
                         }</ul>
                     <br />
                     <Label>Score:</Label>
-                    <Input type="text" value={info.score} />
+                    <Input type="text" value={info.score} onChange={(e) => validate(e.target.value, 'score')}/>
                     <br />
                     <Label>Health Score:</Label>
-                    <Input type="text" value={info.healthScore} />
+                    <Input type="text" value={info.healthScore} onChange={(e) => validate(e.target.value, 'healthScore')}/>
                     <br />
                     <Label>Steps:</Label>
-                    <InputTwo type="text" value={info.steps} />
+                    <InputTwo type="text" value={info.steps} onChange={(e) => validate(e.target.value, 'steps')}/>
                     <br />
                     <br />
                     <DivButton>

@@ -26,6 +26,7 @@ const Titulo = styled.div`
         color: #f07b3f;
         font-family: 'Raleway';
         font-size: 60px;
+        font-weight: 100;
         margin: 0;
         padding: 0;
         text-decoration: none;
