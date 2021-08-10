@@ -18,10 +18,11 @@ const Contenedor = styled.div`
 `;
 
 const ContenedorForm = styled.div`
-    height: 100%;
+    height: auto;
     display: grid;
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 15% 80% 5%;
+    font-family: 'Raleway';
 `;
 
 const Form = styled.form`
@@ -50,25 +51,26 @@ const Label = styled.label`
 const Input = styled.input`
     width: 80%;
     height: 35px;
-    box-shadow: 5px 5px 20px lightgray;
     border-radius: 3px;
+    border: 1px solid #ced4da;
 `;
 
 const InputTwo = styled.input`
     width: 80%;
     height: 80px;
-    box-shadow: 5px 5px 20px lightgray;
     border-radius: 3px;
     padding: 0;
+    border: 1px solid #ced4da;
 `;
 
 const Select = styled.select`
     width: 30%;
     height: 10%;
-    box-shadow: 5px 5px 20px lightgray;
     border-radius: 3px;
     text-transform: capitalize;
     outline: none;
+    padding: 5px;
+    border: 1px solid #ced4da;
 `;
 
 const Option = styled.option`
@@ -183,8 +185,7 @@ export default function Create(params) {
                 <Form onSubmit={(e) => handleSubmit(e)} >
                     <DivRow>
                         <Div1>
-                            <Label>Recipe name:</Label>
-                            <Input type="text" value={info.title} onChange={(e) => validate(e.target.value, 'title')}/>
+                            <Input type="text" placeholder='Recipe name:' value={info.title} onChange={(e) => validate(e.target.value, 'title')}/>
                             <br />
                             <Label>Summary:</Label>
                             <InputTwo type="text" value={info.summary} onChange={(e) => validate(e.target.value, 'summary')}/>

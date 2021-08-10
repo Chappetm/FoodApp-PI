@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import SearchBar from '../SearchBar/SearchBar'
 import { Link, NavLink} from 'react-router-dom'; 
 import home from '../../media/home.png'
+import create from '../../media/create.png'
 
 //Styled-components
 
@@ -44,7 +45,7 @@ const H3 = styled(Link)`
     text-decoration: none;
 `;
 
-const DivHome = styled.div`
+const DivButtons = styled.div`
     width: 33%;
     height: 100%;
     display: flex;
@@ -52,26 +53,41 @@ const DivHome = styled.div`
     justify-content: center;
 `;
 
+const DivHome = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const DivCreate = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 const Links = styled(NavLink)`
-    margin-left: 30px;
     margin-right: 30px;
     text-decoration: none;
     color: #f07b3f;
-    padding: 5px;
+    padding: 7px;
     font-family: 'Raleway';
     &:hover{
         border: 2px #f07b3f solid;
         border-top: none;
         border-left: none;
         border-right: none;
+        padding-bottom: 5px;
     }
     &.active{
         border: 2px #f07b3f solid;
         border-top: none;
         border-left: none;
         border-right: none;
+        padding-bottom: 5px;
     }
 `;
+
+
 //---------------------------------------
 
 export default function Nav(props){
@@ -83,10 +99,16 @@ export default function Nav(props){
                 <H2 to='/'>FOOD</H2>
                 <H3 to='/'>APP</H3>
             </Titulo>
-            <DivHome>
-                <Links to='/home' activeClassName='active'>Home</Links>
+            <DivButtons>
+                <DivHome>
+                    <img src={home} alt="" width='15px' height='15px' />
+                    <Links to='/home' activeClassName='active'>Home</Links>
+                </DivHome>
+                <DivCreate>
+                    <img src={create} alt="" width='15px' height='15px' />
                 <Links to='/create' activeClassName='active'>Create</Links>
-            </DivHome>
+                </DivCreate>
+            </DivButtons>
             <SearchBar />
         </Navi>
     )
