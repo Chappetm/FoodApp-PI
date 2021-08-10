@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import video1 from '../../background.mp4'
-import video2 from '../../background2.mp4'
+import video1 from '../../media/background.mp4'
+import video2 from '../../media/background2.mp4'
 
 //Styled-components
 

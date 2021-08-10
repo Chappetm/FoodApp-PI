@@ -3,20 +3,30 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import getRecipeQuery from '../../actions/getRecipeQuery'
+import lupa from '../../media/lupa.png'
 
 //Styled-components
+const Form = styled.form`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
 const Search = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 50%;
+        align-items: center;
         height: 100%;
+        width: 33%;
 `;
 
 const Bar = styled.input`
     width: 200px;
     height: 30px;
     margin: 10px;
+    margin-right: 0;
     background-color: #141414;
     border: 0.5px #f07b3f solid;
     border-top: none;
@@ -27,9 +37,9 @@ const Bar = styled.input`
     outline: none;
 `;
 
-const Find = styled.input`
-    height: 40px;
-    width: 50px;
+const Find = styled.button`
+    height: 20px;
+    width: 20px;
     border-radius: 5px;
     font-family: 'Raleway';
     background-color: #141414;
@@ -37,9 +47,8 @@ const Find = styled.input`
     color: gray;
     border: none;
     cursor: pointer;
-    &:hover{
-        border: 0.5px #f07b3f solid;
-    }
+    margin: 0;
+    padding: 0;
 `;
 //-------------------------------
 
@@ -59,7 +68,7 @@ export default function SearchBar(){
 
     return (
         <Search>
-            <form 
+            <Form 
             onSubmit={(e) => handleSubmit(e)}
             >
                 <Bar 
@@ -67,9 +76,12 @@ export default function SearchBar(){
                     placeholder="Find your recipe" 
                     value={recipe}
                     onChange={(e) => handleChange(e)}
+                    spellcheck="false"
                 />
-                <Find type="submit" value='Find' />
-            </form>
+                <Find type="submit">
+                    <img src={lupa} alt="Search" width='100%' height='100%'/>
+                </Find>
+            </Form>
         </Search>
             
         

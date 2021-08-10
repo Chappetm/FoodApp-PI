@@ -48,6 +48,7 @@ export default function Home(props){
                 recipePerPage={recipePerPage}
                 recipes={recipes.length}
                 paged={paged}
+                currentPage={currentPage}
             />
             <Footer />
         </div>
