@@ -20,17 +20,19 @@ const Contenedor = styled.div`
 const ContenedorForm = styled.div`
     height: 100%;
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 10% 80% 10%;
     grid-template-rows: 15% 80% 5%;
 `;
 
 const Form = styled.form`
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+
 `;
 
 const H1 = styled.h1`
@@ -98,6 +100,17 @@ const DivButton = styled.div`
     justify-content: center;
 `;
 
+const DivRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+`;
+
+const Div1 = styled.div`
+    width: 50%;
+    height: 80%;
+`;
+
 //------------------------------------------------
 
 export default function Create(params) {
@@ -163,33 +176,39 @@ export default function Create(params) {
             <ContenedorForm>
                 <H1>Create Recipe</H1>
                 <Form onSubmit={(e) => handleSubmit(e)} >
-                    <Label>Recipe name:</Label>
-                    <Input type="text" value={info.title} onChange={(e) => validate(e.target.value, 'title')}/>
-                    <br />
-                    <Label>Summary:</Label>
-                    <InputTwo type="text" value={info.summary} onChange={(e) => validate(e.target.value, 'summary')}/>
-                    <br />
-                    <Label>Diet:</Label>
-                    <Select onChange={(e) => handleDiets(e)}>
-                        {dietas && dietas.map(d => <Option value={`${d}`}>{d}</Option>)}
-                    </Select>
-                    <ul>{info.diets.length 
-                            ? info.diets.map(d => <Li>{d}</Li>)
-                            : null
-                        }</ul>
-                    <br />
-                    <Label>Score:</Label>
-                    <Input type="text" value={info.score} onChange={(e) => validate(e.target.value, 'score')}/>
-                    <br />
-                    <Label>Health Score:</Label>
-                    <Input type="text" value={info.healthScore} onChange={(e) => validate(e.target.value, 'healthScore')}/>
-                    <br />
-                    <Label>Steps:</Label>
-                    <InputTwo type="text" value={info.steps} onChange={(e) => validate(e.target.value, 'steps')}/>
-                    <br />
-                    <br />
+                    <DivRow>
+                        <Div1>
+                            <Label>Recipe name:</Label>
+                            <Input type="text" value={info.title} onChange={(e) => validate(e.target.value, 'title')}/>
+                            <br />
+                            <Label>Summary:</Label>
+                            <InputTwo type="text" value={info.summary} onChange={(e) => validate(e.target.value, 'summary')}/>
+                            <br />
+                            <Label>Diet:</Label>
+                            <Select onChange={(e) => handleDiets(e)}>
+                                {dietas && dietas.map(d => <Option value={`${d}`}>{d}</Option>)}
+                            </Select>
+                            <ul>{info.diets.length 
+                                    ? info.diets.map(d => <Li>{d}</Li>)
+                                    : null
+                                }</ul>
+                            <br />
+                        </Div1>
+                        <Div1>
+                            <Label>Score:</Label>
+                            <Input type="text" value={info.score} onChange={(e) => validate(e.target.value, 'score')}/>
+                            <br />
+                            <Label>Health Score:</Label>
+                            <Input type="text" value={info.healthScore} onChange={(e) => validate(e.target.value, 'healthScore')}/>
+                            <br />
+                            <Label>Steps:</Label>
+                            <InputTwo type="text" value={info.steps} onChange={(e) => validate(e.target.value, 'steps')}/>
+                            <br />
+                            <br />
+                        </Div1>
+                    </DivRow>
                     <DivButton>
-                        <Button type="submit" >CREATE RECIPE</Button>
+                            <Button type="submit" >CREATE RECIPE</Button>
                     </DivButton>
                 </Form>
             </ContenedorForm>
