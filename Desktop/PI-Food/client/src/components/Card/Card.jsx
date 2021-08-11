@@ -62,7 +62,7 @@ const Cardiv = styled.div`
 //-------------------------------------
 
 export default function Card({title, image, diet, id}){
-
+    
     if(typeof diet[0] === 'object'){
         diet = diet.map(el => el.name)
     }

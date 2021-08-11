@@ -5,12 +5,13 @@ import styled from 'styled-components'
 //Styled-components
 
 const DivSelect = styled.div`
-    margin: 10px
+    margin: 10px;
 `;
 
 const Select = styled.select`
     text-transform: capitalize;
     padding: 3px;
+    margin: 5px;
     border-radius: 2px;
     border: 1px solid #ced4da;
     outline: none;
@@ -31,6 +32,14 @@ export default function Filter() {
                 {
                     diets.map(d => <Option>{d}</Option>)
                 }
+            </Select>
+            <Select>
+                <Option>Por nombre</Option>
+                <Option>Por puntuación</Option>
+            </Select>
+            <Select>
+                <Option>Ascendente</Option>
+                <Option>Descendente</Option>
             </Select>
         </DivSelect>
     )
