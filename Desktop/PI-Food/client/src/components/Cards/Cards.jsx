@@ -17,7 +17,6 @@ const Body = styled.div`
 export default function Cards({currentRecipes}){
     
     const recipes = useSelector(store => store.recipesLoaded)
-    
 
     return (
         <Body>

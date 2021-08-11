@@ -42,7 +42,7 @@ const LiSelected = styled.li`
 export default function Paged({ recipePerPage, recipes, paged, currentPage }) {
     const pageNumber = []
 
-    for(let i = 0; i <= Math.ceil(recipes/recipePerPage); i++){
+    for(let i = 0; i <= Math.floor(recipes/recipePerPage); i++){
         pageNumber.push(i+1);
     }
 

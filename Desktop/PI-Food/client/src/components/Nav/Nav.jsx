@@ -1,9 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import SearchBar from '../SearchBar/SearchBar'
 import { Link, NavLink} from 'react-router-dom'; 
 import home from '../../media/home.png'
 import create from '../../media/create.png'
+import getRecipes from '../../actions/getRecipes'
 
 //Styled-components
 
@@ -57,12 +59,14 @@ const DivHome = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 30px;
 `;
 
 const DivCreate = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 30px;
 `;
 
 const Links = styled(NavLink)`
@@ -90,8 +94,10 @@ const Links = styled(NavLink)`
 
 //---------------------------------------
 
-export default function Nav(props){
+export default function Nav(){
     
+    const dispatch = useDispatch()
+
 
     return (
         <Navi>

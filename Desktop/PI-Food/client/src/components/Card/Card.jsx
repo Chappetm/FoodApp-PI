@@ -38,6 +38,7 @@ const Cardiv = styled.div`
         margin: 10px;
         padding: 0;
         text-decoration: none;
+        text-transform: capitalize;
         color: black;
         font-size: 20px;
         font-weight: 700;
@@ -61,6 +62,10 @@ const Cardiv = styled.div`
 //-------------------------------------
 
 export default function Card({title, image, diet, id}){
+
+    if(typeof diet[0] === 'object'){
+        diet = diet.map(el => el.name)
+    }
 
     return (
        <Cardiv>

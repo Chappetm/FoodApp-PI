@@ -19,9 +19,9 @@ const Contenedor = styled.div`
 
 const ContenedorForm = styled.div`
     height: auto;
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 15% 80% 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     font-family: 'Raleway';
 `;
 
@@ -29,47 +29,102 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
-
+    margin: 30px;
 `;
 
 const H1 = styled.h1`
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
     text-align: center;
+    margin: 30px;
+    font-weight: 500;
+`;
+
+const DivLabel = styled.div`
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 1em;
+    transition: all .3s;
+    text-align: start;
+    &:focus-within{
+        transform: scale(1.05, 1.05);
+    }
 `;
 
 const Label = styled.label`
-    font-weight: 700;
+    font-size: 20px;
+    color: #aaa;
+    display: block;
+    opacity: 1;
+    transform: translateY(-1.9em);
+    transform-origin: 0 0;
+    transition: all .3s;
+    margin: 1px;
 `;
 
-const Input = styled.input`
-    width: 80%;
-    height: 35px;
-    border-radius: 3px;
-    border: 1px solid #ced4da;
+const Input = styled.input` 
+    font-size: 20px;
+    width: 100%;
+    border-style: none none solid none;
+    border-color: #aaa; 
+    padding: 2px 8px;
+    box-shadow: none;
+    transition: all .5s;
+    &::placeholder{
+        color: transparent;
+    }
+    &:focus{
+        box-shadow: none;
+        outline: none;
+        border-color: #f07b3f;
+    }
+    &:focus + Label, 
+    &:not(:placeholder-shown) + Label {
+        transform: translateY(-2.5em) scale(.7)
+    }
+    &:invalid + Label{
+        color: red;
+    }
+    &:not(:focus, :required):invalid + Label:after{
+        content: '  (Ingresar titulo de la receta)';
+    }
+    /* &:valid + Label:after{
+        content: '   ✔';
+        color: green;
+    } */
 `;
 
-const InputTwo = styled.input`
-    width: 80%;
-    height: 80px;
-    border-radius: 3px;
-    padding: 0;
-    border: 1px solid #ced4da;
+const InputTwo = styled.textarea`
+    font-family: 'Raleway';
+    font-size: 15px;
+    width: 100%;
+    height: 50px;
+    border-style: none none solid none;
+    border-color: #aaa; 
+    padding: 2px 8px;
+    box-shadow: none;
+    transition: all .5s;
+    &::placeholder{
+        color: transparent;
+    }
+    &:focus{
+        box-shadow: none;
+        outline: none;
+        border-color: #f07b3f;
+    }
+    &:focus + Label, 
+    &:not(:placeholder-shown) + Label {
+        transform: translateY(-4.3em) scale(.7)
+    }
 `;
 
 const Select = styled.select`
-    width: 30%;
-    height: 10%;
+    height: 30px;
+    width: 200px;
     border-radius: 3px;
     text-transform: capitalize;
     outline: none;
-    padding: 5px;
     border: 1px solid #ced4da;
 `;
 
@@ -118,18 +173,28 @@ const Div1 = styled.div`
     align-items: center;
 `;
 
+const DivSelect = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const LabelSelect = styled.label`
+    color: #aaa;
+    margin: 10px;
+`;
+
 //------------------------------------------------
 
 export default function Create(params) {
     const [ info, setInfo ] = useState({
         title: '',
         summary: '',
-        score: '',
+        spoonacularScore: '',
         healthScore: '',
-        steps: '',
+        analyzedInstructions: '',
         diets: []
     })
-    const [ diets, setDiets] = useState([])
 
     const dietas = useSelector(store => store.diets)
 
@@ -139,19 +204,12 @@ export default function Create(params) {
         dispatch(getDiets())
     }, [])
 
-    const validate = (value, type) => {
-        switch(type){
-            case 'title':
-                // if(){
-
-                // } else {
-                    
-                // }
-            case 'summary':
-            case 'score':
-            case 'healthScore':
-            case 'steps':
-        }
+    const handleChange = (e) => {
+        setInfo({
+            ...info,
+            [e.target.name]: e.target.value
+        })
+        console.log(typeof info)
     }
 
     const handleDiets = (e) => {
@@ -163,16 +221,16 @@ export default function Create(params) {
         }
     }
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e){
         e.preventDefault()
-        dispatch(createRecipe(info));
+        await dispatch(createRecipe(info));
         alert('Recipe created')
         setInfo({
             title: '',
             summary: '',
-            score: '',
+            spoonacularScore: '',
             healthScore: '',
-            steps: '',
+            analyzedInstructions: '',
             diets: []
         })
     }
@@ -185,30 +243,45 @@ export default function Create(params) {
                 <Form onSubmit={(e) => handleSubmit(e)} >
                     <DivRow>
                         <Div1>
-                            <Input type="text" placeholder='Recipe name:' value={info.title} onChange={(e) => validate(e.target.value, 'title')}/>
+                            <DivLabel>
+                                <Input name='title' type="text" id='name' placeholder='Recipe name:' value={info.title} onChange={(e) => handleChange(e)}/>
+                                <Label for='name'>Recipe name*</Label>
+                            </DivLabel>
                             <br />
-                            <Label>Summary:</Label>
-                            <InputTwo type="text" value={info.summary} onChange={(e) => validate(e.target.value, 'summary')}/>
+                            <DivLabel>
+                                <InputTwo name='summary' type="text" placeholder='Summary:' id='summary' value={info.summary} onChange={(e) => handleChange(e)}/>
+                                <Label for='summary'>Summary*</Label>
+                            </DivLabel>
                             <br />
-                            <Label>Diet:</Label>
-                            <Select onChange={(e) => handleDiets(e)}>
-                                {dietas && dietas.map(d => <Option value={`${d}`}>{d}</Option>)}
-                            </Select>
-                            <ul>{info.diets.length 
-                                    ? info.diets.map(d => <Li>{d}</Li>)
-                                    : null
-                                }</ul>
+                            <DivSelect>
+                                <LabelSelect>Diet</LabelSelect>
+                                <Select name='diets' onChange={(e) => handleDiets(e)}>
+                                    {dietas && dietas.map(d => <Option value={`${d}`}>{d}</Option>)}
+                                </Select>
+                                <div>
+                                    <ul>{info.diets.length 
+                                        ? info.diets.map(d => <Li>{d}</Li>)
+                                        : null
+                                    }</ul>
+                                </div>
+                            </DivSelect>
                             <br />
                         </Div1>
                         <Div1>
-                            <Label>Score:</Label>
-                            <Input type="text" value={info.score} onChange={(e) => validate(e.target.value, 'score')}/>
+                            <DivLabel>
+                                <Input name='spoonacularScore' type="number" placeholder='Score:' id='spoonacularScore' value={info.spoonacularScore} onChange={(e) => handleChange(e)}/>
+                                <Label for='spoonacularScore'>Score</Label>
+                            </DivLabel>
                             <br />
-                            <Label>Health Score:</Label>
-                            <Input type="text" value={info.healthScore} onChange={(e) => validate(e.target.value, 'healthScore')}/>
+                            <DivLabel>
+                                <Input name='healthScore'type="number" placeholder='Health Score:' id='health' value={info.healthScore} onChange={(e) => handleChange(e)}/>
+                                <Label for='health'>Health Score</Label>
+                            </DivLabel>
                             <br />
-                            <Label>Steps:</Label>
-                            <InputTwo type="text" value={info.steps} onChange={(e) => validate(e.target.value, 'steps')}/>
+                            <DivLabel>
+                                <InputTwo name='analyzedInstructions' type="text" placeholder='Steps:' id='analyzedInstructions' value={info.analyzedInstructions}onChange={(e) => handleChange(e)}/>
+                                <Label for='analyzedInstructions'>Steps</Label>
+                            </DivLabel>
                             <br />
                             <br />
                         </Div1>

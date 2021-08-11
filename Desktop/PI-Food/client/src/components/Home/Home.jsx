@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav'
 import Cards from '../Cards/Cards'
 import Footer from '../Footer/Footer'
 import Paged from '../Paged/Paged'
+import Filter from '../Filter/Filter'
 import styled from 'styled-components'
 import getRecipes from '../../actions/getRecipes'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,10 +13,10 @@ import { useDispatch, useSelector } from 'react-redux'
 const Body = styled.div`
         height: 100%;
         width: 100%;
-        position: relative;
-        display: grid;
+        display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
     `
 
 //-----------------------------------------
@@ -42,6 +43,7 @@ export default function Home(props){
         <div>
             <Nav />
             <Body>
+                <Filter />
                 <Cards currentRecipes={currentRecipes}/>
             </Body>
             <Paged 

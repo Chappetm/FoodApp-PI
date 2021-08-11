@@ -73,7 +73,7 @@ export default function SearchBar(){
             >
                 <Bar 
                     type="text"
-                    placeholder="Find your recipe" 
+                    placeholder="Search..." 
                     value={recipe}
                     onChange={(e) => handleChange(e)}
                     spellcheck="false"
