@@ -95,7 +95,7 @@ const Input = styled.input`
     } */
 `;
 
-const InputTwo = styled.textarea`
+const InputTextarea = styled.textarea`
     font-family: 'Raleway';
     font-size: 15px;
     width: 100%;
@@ -116,6 +116,35 @@ const InputTwo = styled.textarea`
     &:focus + Label, 
     &:not(:placeholder-shown) + Label {
         transform: translateY(-4.3em) scale(.7)
+    }
+`;
+
+const InputRange = styled.input`
+    font-size: 20px;
+    width: 100%;
+    border-style: none none solid none;
+    border-color: #aaa; 
+    padding: 2px 8px;
+    box-shadow: none;
+    transition: all .5s;
+    cursor: pointer;
+    &::placeholder{
+        color: transparent;
+    }
+    &:focus{
+        box-shadow: none;
+        outline: none;
+        border-color: #f07b3f;
+    }
+    &:focus + Label, 
+    &:not(:placeholder-shown) + Label {
+        transform: translateY(-2.5em) scale(.7)
+    }
+    &:invalid + Label{
+        color: red;
+    }
+    &:not(:focus, :required):invalid + Label:after{
+        content: '  (Ingresar titulo de la receta)';
     }
 `;
 
@@ -177,6 +206,15 @@ const DivSelect = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+`;
+
+const DivRange = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
 `;
 
 const LabelSelect = styled.label`
@@ -249,7 +287,7 @@ export default function Create(params) {
                             </DivLabel>
                             <br />
                             <DivLabel>
-                                <InputTwo name='summary' type="text" placeholder='Summary:' id='summary' value={info.summary} onChange={(e) => handleChange(e)}/>
+                                <InputTextarea name='summary' type="text" placeholder='Summary:' id='summary' value={info.summary} onChange={(e) => handleChange(e)}/>
                                 <Label for='summary'>Summary*</Label>
                             </DivLabel>
                             <br />
@@ -268,18 +306,22 @@ export default function Create(params) {
                             <br />
                         </Div1>
                         <Div1>
-                            <DivLabel>
-                                <Input name='spoonacularScore' type="number" placeholder='Score:' id='spoonacularScore' value={info.spoonacularScore} onChange={(e) => handleChange(e)}/>
-                                <Label for='spoonacularScore'>Score</Label>
-                            </DivLabel>
+                            <DivRange>
+                                <span>0</span>
+                                <DivLabel>
+                                    <InputRange name='spoonacularScore' value='0' min="0" max="100" type="range" placeholder='Score:' id='spoonacularScore' value={info.spoonacularScore} onChange={(e) => handleChange(e)}/>
+                                    <Label for='spoonacularScore'>Score</Label>
+                                </DivLabel>
+                                <span>100</span>
+                            </DivRange>
                             <br />
                             <DivLabel>
-                                <Input name='healthScore'type="number" placeholder='Health Score:' id='health' value={info.healthScore} onChange={(e) => handleChange(e)}/>
+                                <InputRange name='healthScore' value='0' type="range" min="0" max="100" placeholder='Health Score:' id='health' value={info.healthScore} onChange={(e) => handleChange(e)}/>
                                 <Label for='health'>Health Score</Label>
                             </DivLabel>
                             <br />
                             <DivLabel>
-                                <InputTwo name='analyzedInstructions' type="text" placeholder='Steps:' id='analyzedInstructions' value={info.analyzedInstructions}onChange={(e) => handleChange(e)}/>
+                                <InputTextarea name='analyzedInstructions' type="text" placeholder='Steps:' id='analyzedInstructions' value={info.analyzedInstructions}onChange={(e) => handleChange(e)}/>
                                 <Label for='analyzedInstructions'>Steps</Label>
                             </DivLabel>
                             <br />

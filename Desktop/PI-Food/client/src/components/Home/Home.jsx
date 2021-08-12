@@ -6,6 +6,7 @@ import Paged from '../Paged/Paged'
 import Filter from '../Filter/Filter'
 import styled from 'styled-components'
 import getRecipes from '../../actions/getRecipes'
+import getDiets from '../../actions/getDiets'
 import { useDispatch, useSelector } from 'react-redux'
 
 //Styled-components
@@ -37,6 +38,7 @@ export default function Home(props){
 
     useEffect(() => {
         dispatch(getRecipes());
+        dispatch(getDiets());
     }, []);
 
     return (
