@@ -26,6 +26,7 @@ export default function Home(props){
     
     const dispatch = useDispatch();
     const recipes = useSelector(store => store.recipesLoaded)
+    const [order, setOrder] = useState('')
     const [currentPage, setCurrentPage] = useState(1) //Pagina actual (inicia en la 1)
     const [recipePerPage, setRecipePerPage] = useState(9) //Cantidad de recetas por pagina
     const indexOfLastRecipe = currentPage * recipePerPage //'Indice' de la ultima receta
@@ -41,11 +42,12 @@ export default function Home(props){
         dispatch(getDiets());
     }, []);
 
+    console.log('HOMEEEEEEEEEEE', order)
     return (
         <div>
             <Nav />
             <Body>
-                <Filter />
+                <Filter setCurrentPage={setCurrentPage} setOrder={setOrder}/>
                 <Cards currentRecipes={currentRecipes}/>
             </Body>
             <Paged 

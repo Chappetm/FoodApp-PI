@@ -55,8 +55,8 @@ export default function reducer(state = initialState, action){
                 recipesLoaded: filter
             }
         case ORDER_BY_NAME:
-            console.log('ENTREEEEEEEEEEEEE', action.payload)
-            const sort = action.payload === 'asc' ? state.allRecipes.sort((a, b) => {
+            let all = state.allRecipes
+            let sort = action.payload === 'asc' ? all.sort(function(a, b){
                 if(a.name > b.name){
                     return 1
                 }
@@ -64,7 +64,7 @@ export default function reducer(state = initialState, action){
                     return -1
                 }
                 return 0
-            }) : state.allRecipes.sort((a, b) => {
+            }) : all.sort(function(a, b){
                     if(a.name > b.name){
                         return -1
                     }

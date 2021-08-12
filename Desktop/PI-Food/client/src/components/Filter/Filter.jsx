@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import filterRecipesByDiet from '../../actions/filterRecipesByDiet'
+import orderByName from '../../actions/orderByName'
 
 //Styled-components
 
@@ -24,17 +25,23 @@ const Option = styled.option`
 
 //--------------------------------------------
 
-export default function Filter() {
-    const diets = useSelector(store => store.diets)
-    const dispatch = useDispatch()
+export default function Filter({setCurrentPage, setOrder}) {
+    const diets = useSelector(store => store.diets);
+    const dispatch = useDispatch();
     
     const handleFilterDiet = (e) => {
+        e.preventDefault();
         dispatch(filterRecipesByDiet(e.target.value))
-    }
+        setCurrentPage(1)
+    };
 
     const handleSort = (e) => {
+        e.preventDefault();
         dispatch(orderByName(e.target.value))
-    }
+        setCurrentPage(1)
+        setOrder(`Ordenado ${e.target.value}`)
+    };
+
 
     return (
         <DivSelect>
