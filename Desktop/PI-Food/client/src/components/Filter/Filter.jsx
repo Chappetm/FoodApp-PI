@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import filterRecipesByDiet from '../../actions/filterRecipesByDiet'
 import orderByName from '../../actions/orderByName'
+import orderByScore from '../../actions/orderByScore'
 
 //Styled-components
 
@@ -35,13 +36,19 @@ export default function Filter({setCurrentPage, setOrder}) {
         setCurrentPage(1)
     };
 
-    const handleSort = (e) => {
+    const handleSortName = (e) => {
         e.preventDefault();
         dispatch(orderByName(e.target.value))
         setCurrentPage(1)
         setOrder(`Ordenado ${e.target.value}`)
     };
 
+    const handleSortScore = (e) => {
+        e.preventDefault();
+        dispatch(orderByScore(e.target.value))
+        setCurrentPage(1)
+        setOrder(`Ordenado ${e.target.value}`)
+    };
 
     return (
         <DivSelect>
@@ -51,14 +58,13 @@ export default function Filter({setCurrentPage, setOrder}) {
                     diets.map(d => <Option>{d}</Option>)
                 }
             </Select>
-            <Select>
-                <Option>All</Option>
-                <Option>By Name</Option>
-                <Option>By Score</Option>
+            <Select onChange={(e) => {handleSortName(e)}}>
+                <Option value='asc'>Name ↑</Option>
+                <Option value='desc'>Name ↓</Option>
             </Select>
-            <Select onChange={(e) => {handleSort(e)}}>
-                <Option value='asc'>Ascending order</Option>
-                <Option value='desc'>Descending order</Option>
+            <Select onChange={(e) => {handleSortScore(e)}}>
+                <Option value='asc'>Score ↑</Option>
+                <Option value='desc'>Score ↓</Option>
             </Select>
         </DivSelect>
     )

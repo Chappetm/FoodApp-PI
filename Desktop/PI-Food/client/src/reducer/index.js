@@ -1,4 +1,4 @@
-import { GET_DIETS, GET_ID, GET_QUERY, GET_RECIPES, POST_RECIPE, FILTER_BY_DIET, ORDER_BY_NAME } from "../actions"
+import { GET_DIETS, GET_ID, GET_QUERY, GET_RECIPES, POST_RECIPE, FILTER_BY_DIET, ORDER_BY_NAME, ORDER_BY_SCORE } from "../actions"
 
 const initialState = {
     recipesLoaded: [],
@@ -57,26 +57,49 @@ export default function reducer(state = initialState, action){
         case ORDER_BY_NAME:
             let all = state.allRecipes
             let sort = action.payload === 'asc' ? all.sort(function(a, b){
-                if(a.name > b.name){
+                if(a.title > b.title){
                     return 1
                 }
-                if(b.name > a.name){
+                if(b.title > a.title){
                     return -1
                 }
                 return 0
             }) : all.sort(function(a, b){
-                    if(a.name > b.name){
-                        return -1
-                    }
-                    if(b.name > a.name){
-                        return 1
-                    }
-                    return 0
+                if(a.title > b.title){
+                    return -1
+                }
+                if(b.title > a.title){
+                    return 1
+                }
+                return 0
             })
-
             return {
                 ...state,
                 recipesLoaded: sort
+            }
+
+        case ORDER_BY_SCORE:
+            let todas = state.allRecipes
+            let order = action.payload === 'asc' ? todas.sort(function(a, b){
+                if(a.spoonacularScore > b.spoonacularScore){
+                    return 1
+                }
+                if(b.spoonacularScore > a.spoonacularScore){
+                    return -1
+                }
+                return 0
+            }) : todas.sort(function(a, b){
+                if(a.spoonacularScore > b.spoonacularScore){
+                    return -1
+                }
+                if(b.spoonacularScore > a.spoonacularScore){
+                    return 1
+                }
+                return 0
+            })
+            return {
+                ...state,
+                recipesLoaded: order
             }
             
         default: 

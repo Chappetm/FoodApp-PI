@@ -41,8 +41,7 @@ export default function Home(props){
         dispatch(getRecipes());
         dispatch(getDiets());
     }, []);
-
-    console.log('HOMEEEEEEEEEEE', order)
+    
     return (
         <div>
             <Nav />
