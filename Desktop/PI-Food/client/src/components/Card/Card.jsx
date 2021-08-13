@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 //Styled-components
-const Cardiv = styled.div`
+const Cardiv = styled(Link)`
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: 58% 15% 27%;
@@ -16,11 +16,11 @@ const Cardiv = styled.div`
         border-radius: 5px;
         box-shadow: 5px 5px 20px lightgray;
         cursor: pointer;
+        text-decoration: none;
+        color: black;
         &:hover{
-            Img{
-                transition: all 2s ease;
-                transform: scale(1.2);
-            }
+            transition: all 0.5s ease;
+            transform: scale(0.9);
         }
     `;
 
@@ -43,10 +43,9 @@ const Cardiv = styled.div`
         align-items: center;
     `;
 
-    const H3 = styled(Link)`
+    const H3 = styled.h3`
         margin: 10px;
         padding: 0;
-        text-decoration: none;
         text-transform: capitalize;
         color: black;
         font-size: 20px;
@@ -80,12 +79,12 @@ export default function Card({title, image, diet, id}){
     }
 
     return (
-       <Cardiv>
+       <Cardiv to={`/detail/${id}`}>
         <DivImg>
             <Img src={image} alt="img not found" />
         </DivImg>
         <DivH3>
-            <H3 to={`/detail/${id}`}>{title}</H3>
+            <H3>{title}</H3>
         </DivH3>
         <Diet>
             <ul>{diet.map(d => <li>{d}</li>)}</ul>
