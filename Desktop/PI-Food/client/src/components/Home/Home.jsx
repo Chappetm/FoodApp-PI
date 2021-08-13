@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import getRecipes from '../../actions/getRecipes'
 import getDiets from '../../actions/getDiets'
 import { useDispatch, useSelector } from 'react-redux'
+import loader from '../../media/loader3.gif'
 
 //Styled-components
 
@@ -18,7 +19,19 @@ const Body = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    `
+`;
+
+const DivHome = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100%;
+`;
+
+const Divpre = styled.div`
+    height: auto;
+`;
 
 //-----------------------------------------
 
@@ -41,21 +54,27 @@ export default function Home(props){
         dispatch(getRecipes());
         dispatch(getDiets());
     }, []);
-    
+
     return (
-        <div>
+        <DivHome>
             <Nav />
-            <Body>
-                <Filter setCurrentPage={setCurrentPage} setOrder={setOrder}/>
-                <Cards currentRecipes={currentRecipes}/>
-            </Body>
-            <Paged 
-                recipePerPage={recipePerPage}
-                recipes={recipes.length}
-                paged={paged}
-                currentPage={currentPage}
-            />
+            {
+                (!currentRecipes.length)
+                    ? <img src={loader} alt='Cargando...' />
+                    : <Divpre id='divpre'>
+                        <Body>
+                            <Filter setCurrentPage={setCurrentPage} setOrder={setOrder}/>
+                            <Cards currentRecipes={currentRecipes}/>
+                        </Body>
+                        <Paged 
+                            recipePerPage={recipePerPage}
+                            recipes={recipes.length}
+                            paged={paged}
+                            currentPage={currentPage}
+                        />
+                    </Divpre> 
+            }
             <Footer />
-        </div>
+        </DivHome>
     )
 }

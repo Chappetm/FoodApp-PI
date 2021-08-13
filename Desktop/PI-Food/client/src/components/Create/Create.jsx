@@ -115,7 +115,7 @@ const InputTextarea = styled.textarea`
     }
     &:focus + Label, 
     &:not(:placeholder-shown) + Label {
-        transform: translateY(-4.3em) scale(.7)
+        transform: translateY(-3.6em) scale(.7)
     }
 `;
 

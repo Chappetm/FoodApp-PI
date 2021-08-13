@@ -1,20 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Footer(){
-    const Footer = styled.div`
+//Styled-components
+
+const DivFooter = styled.div`
         height: 90px;
+        width: 100%;
         display:flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         background-color: #141414;
-        color: #f07b3f
-    `;
+        color: #f07b3f;
+`;
+
+//---------------------------------------
+export default function Footer(){
 
     return (
-        <Footer>
+        <DivFooter>
             <span>Este es el footer</span>
-        </Footer>
+        </DivFooter>
     )
 }

@@ -15,7 +15,15 @@ const Cardiv = styled.div`
         padding: 0px;
         border-radius: 5px;
         box-shadow: 5px 5px 20px lightgray;
+        cursor: pointer;
+        &:hover{
+            Img{
+                transition: all 2s ease;
+                transform: scale(1.2);
+            }
+        }
     `;
+
     const Diet = styled.div`
         display: flex;
         justify-content: flex-start;
@@ -34,6 +42,7 @@ const Cardiv = styled.div`
         justify-content: center;
         align-items: center;
     `;
+
     const H3 = styled(Link)`
         margin: 10px;
         padding: 0;
@@ -47,10 +56,13 @@ const Cardiv = styled.div`
     `;
     
     const DivImg = styled.div`
+        height: 231px;
+        width: 330px;
         margin: 10px;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
+        overflow: hidden;
     `;
 
     const Img = styled.img`
