@@ -4,7 +4,7 @@ import styled from 'styled-components'
 //Styled-components
 
 const DivFooter = styled.div`
-        height: 90px;
+        height: 150px;
         width: 100%;
         display:flex;
         flex-direction: row;

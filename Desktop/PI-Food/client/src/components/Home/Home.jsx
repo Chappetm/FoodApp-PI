@@ -9,6 +9,7 @@ import getRecipes from '../../actions/getRecipes'
 import getDiets from '../../actions/getDiets'
 import { useDispatch, useSelector } from 'react-redux'
 import loader from '../../media/loader3.gif'
+import video1 from '../../media/video.mp4'
 
 //Styled-components
 
@@ -31,6 +32,28 @@ const DivHome = styled.div`
 
 const Divpre = styled.div`
     height: auto;
+`;
+
+const DivVideoHome = styled.div`
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+`;
+
+const DivVideoColor = styled.div`
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+const Video = styled.video`
+    width: 100%;
 `;
 
 //-----------------------------------------
@@ -62,6 +85,12 @@ export default function Home(props){
                 (!currentRecipes.length)
                     ? <img src={loader} alt='Cargando...' />
                     : <Divpre id='divpre'>
+                        <DivVideoHome>
+                            <Video muted autoPlay loop>
+                                <source src={video1} type="video/mp4"/>
+                            </Video>
+                            <DivVideoColor></DivVideoColor>
+                        </DivVideoHome>
                         <Body>
                             <Filter setCurrentPage={setCurrentPage} setOrder={setOrder}/>
                             <Cards currentRecipes={currentRecipes}/>
