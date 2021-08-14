@@ -6,7 +6,6 @@ const axios = require('axios');
 
 const router = Router();
 
-
 router.get('/', async (req, res) => {     //GET /recipes?name="..."
     // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
     // Si no existe ninguna receta mostrar un mensaje adecuado
@@ -17,21 +16,28 @@ router.get('/', async (req, res) => {     //GET /recipes?name="..."
             where: {
                 title: {[Op.substring]: name}    //En la columna name debe estar el 'name'
             }, 
-            include: [Diet]                      //Join con el model 'Diet'
-        })
+            include: {                      //Join con el model 'Diet'
+                model: Diet,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }
+        }) 
         
-        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true`) //Busca en la api con el query 'name'
-        const respTotal = respDb.concat(respApi.data.results).slice(0, 9)
+        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true&number=10`) //Busca en la api con el query 'name'
+        
+        const respTotal = respDb.concat(respApi.data.results)
 
         if(respTotal.length){
-            res.status(200).send(respTotal);   //Devuelve los arreglos concatenados
+            res.status(200).json(respTotal);   //Devuelve los arreglos concatenados
         } else{
             res.status(400).send('No existe receta relacionada')  //Devuelve error 
         }
 
     } else {
-        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true`)
-        const result = respApi.data.results.slice(0, 9)
+        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true&number=50`)
+        const result = respApi.data.results
         res.status(200).send(result); //Si no pasan un 'name' por query, responde con las 10 primeras recetas
     }
     //---------------------------------------------------
@@ -46,7 +52,6 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
     if(id.length < 10){
         const response = await axios.get(`${URL_ID}${id}/information?${API_KEY}`)
         const finalResponse = response.data;
-        console.log(response)
         
         const idRecipe = {
             id: finalResponse.id,
@@ -55,6 +60,9 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
             diets: finalResponse.diets,
             dishTypes: finalResponse.dishTypes,
             summary: finalResponse.summary,
+            readyInMinutes: finalResponse.readyInMinutes,
+            servings: finalResponse.servings,
+            cuisines: finalResponse.cuisines,
             healthScore: finalResponse.healthScore,
             spoonacularScore: finalResponse.spoonacularScore,
             analyzedInstructions: (finalResponse.analyzedInstructions.length > 0) ? finalResponse.analyzedInstructions[0].steps.map(e => e.step) : "No se encontraron datos"
@@ -69,7 +77,7 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
             include: Diet
         })
 
-        res.status(200).send(response)
+        res.status(200).send(response[0])
     }
 
 })  
