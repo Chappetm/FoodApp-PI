@@ -20,7 +20,7 @@ const Cardiv = styled(Link)`
         color: black;
         &:hover{
             transition: all 0.5s ease;
-            transform: scale(0.9);
+            transform: scale(0.95);
         }
     `;
 

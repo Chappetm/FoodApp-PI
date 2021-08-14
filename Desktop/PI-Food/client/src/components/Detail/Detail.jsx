@@ -4,42 +4,132 @@ import Footer from '../Footer/Footer'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
 import getRecipeId from '../../actions/getRecipeId';
+import loader from '../../media/loader3.gif'
+import porciones from '../../media/cubiertos.png'
+import world from '../../media/worldwide.png'
+import healthScore from '../../media/healthScore.png'
+import serving from '../../media/serving.png'
+import clock from '../../media/clock.png'
+import score from '../../media/score.png'
+import diets from '../../media/diet.png'
+import summary from '../../media/summary.png'
+import steps from '../../media/steps.png'
+
+//Styled-components
 
 const Contenedor = styled.div`
-    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Raleway';
 `;
 
 const Principal = styled.div`
-    display: grid;
-    grid-template-columns: 5% 48% 2% 40% 5%;
-    grid-template-rows: 5% 60% 30% 5%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 100%;
-    width: 100%;
     margin: 10px;
 `;
 
-const Info = styled.div`
+const DivImg = styled.div`
+    width: 50%;
+    height: 100%;
+`;
+
+const DivH1Img = styled.div`
     width: 100%;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+const H2 = styled.h2`
+    font-family: 'Pacifico';
+    font-size: 30px;
+    font-weight: 100;
+    text-align: center;
+    color: #f07b3f;
+    width: 100%;
+`;
+
+const DivH2Diets = styled.div`
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+`;
+
+const DivDiets = styled.div`
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    text-transform: capitalize;
+`;
+
+const DivSummary = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+`;
+
+const Summary = styled.span`
+    cursor: default;
+    a {
+        text-decoration: none;
+        color: black;
+        pointer-events: none;
+    }
 `;
 
 const Img = styled.img`
     width: 100%;
-    grid-column-start: 4;
-    grid-column-end: 5;
-    grid-row-start: 2;
-    grid-row-end: 3;
+    height: 100%;
+    margin-top: 20px;
 `;
 
-const Steps = styled.div`
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row-start: 3;
-    grid-row-end: 4;
+const DivCentral = styled.div`
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    align-items: flex-start;
+
 `;
+
+const DivCentral1 = styled.div`
+    height: 100%;
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content:center;
+`;
+
+const DivCentral2 = styled.div`
+    height: 100%;
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content:center;
+`;
+
+const DivTitulos = styled.div`
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+`;
+
+//-------------------------------------
 
 export default function Detail(props){
     const dispatch = useDispatch();
@@ -50,34 +140,65 @@ export default function Detail(props){
 
     const detail = useSelector(store => store.recipeDetail)
 
-    console.log(detail.analyzedInstructions)
+    // <h4 className="descriptionDetails" dangerouslySetInnerHTML={funcDescription()}></h4>
+
+    const funcDescription = () => {
+        return  {__html: detail.summary};
+    }
 
     return (
         <Contenedor>
             <Nav />
-            <Principal>
-                <Info>
-                    <h2>{detail.title}</h2>
-                    <ul>{
-                            detail.diets
-                                ? detail.diets.map(d => <li>{d}</li>)
-                                : <span>No diets</span> 
-                        }</ul>
-                    <br />
-                    <span>{detail.summary}</span>
-                </Info>
-                <Img src={detail.image} alt="image not found" />
-                <h5>puntuacion</h5>
-                <h5>nivel de comida saludable</h5>
-                <Steps>
-                    <h4>Steps:</h4>
-                    <ul>{
-                            detail.analyzedInstructions && detail.analyzedInstructions  !== 'No se encontraron datos'
-                            ? detail.analyzedInstructions.map(d => <li>{d}</li>)
-                            : <span>No steps</span>
-                    }</ul>
-                </Steps>
-            </Principal>
+            {
+                (detail.length === 0)
+                    ? <img src={loader} alt='Cargando...' />
+                    : <Principal>
+                        <DivH1Img>
+                            <DivH2Diets>
+                                <H2>{detail.title}</H2>
+                                <DivDiets>
+                                    <DivTitulos><img src={diets} width='30px' height='30px'/><h4>Diets:</h4></DivTitulos>
+                                    <ul>{
+                                        detail.diets
+                                            ? detail.diets.map(d => <li>{d}</li>)
+                                            : <span>No diets</span> 
+                                    }</ul>
+                                </DivDiets>
+                            </DivH2Diets>
+                            <DivImg>
+                                <Img src={detail.image} alt="image not found" />
+                            </DivImg>
+                        </DivH1Img>
+                        <DivCentral>
+                            <DivCentral1>
+                            <DivTitulos><img src={world} width='30px' height='30px'/><h4> Cuisines:</h4></DivTitulos>
+                                {(detail.cuisines.length) 
+                                    ? <ul>{detail.cuisines.map(el => <li>{el}</li>)}</ul> : <p>-</p>}
+                                <DivTitulos><img src={serving} width='30px' height='30px'/><h4> Servings:</h4> <p>{detail.servings}</p></DivTitulos>
+                                <DivTitulos><img src={clock} width='30px' height='30px'/><h4> Cooking time: </h4><p>{detail.readyInMinutes} min.</p></DivTitulos>
+                            </DivCentral1>
+                            <DivCentral2>
+                                <DivTitulos><img src={score} width='30px' height='30px'/><h4> Score:</h4> <p>{detail.spoonacularScore}</p></DivTitulos>
+                                <DivTitulos><img src={healthScore} width='30px' height='30px'/><h4> Health score: </h4><p>{detail.healthScore}</p></DivTitulos>
+                            </DivCentral2>
+                        </DivCentral>
+                        <br />
+                        <DivSummary>
+                            <DivTitulos><img src={summary} width='30px' height='30px'/><h4> Summary:</h4></DivTitulos>
+                            <Summary dangerouslySetInnerHTML={funcDescription()} />
+                        </DivSummary>
+                        <br />
+                        <DivSummary>
+                            <DivTitulos><img src={steps} width='30px' height='30px' /><h4> Steps:</h4></DivTitulos>
+                            <ul>{
+                                detail.analyzedInstructions && detail.analyzedInstructions  !== 'No se encontraron datos'
+                                ? detail.analyzedInstructions.map(d => <li>{d}</li>)
+                                : <span>No steps</span>
+                            }</ul>
+                        </DivSummary>
+                    </Principal>
+            }
+            
             <Footer />
         </Contenedor>
     )

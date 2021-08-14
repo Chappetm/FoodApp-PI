@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import SearchBar from '../SearchBar/SearchBar'
 import { Link, NavLink} from 'react-router-dom'; 
-import home from '../../media/home.png'
+import recipes from '../../media/recipes.png'
 import create from '../../media/create.png'
+import favorite from '../../media/favorito.png'
 import getRecipes from '../../actions/getRecipes'
 
 //Styled-components
@@ -75,6 +76,7 @@ const Links = styled(NavLink)`
     color: #f07b3f;
     padding: 7px;
     font-family: 'Raleway';
+    font-size: 1.2em;
     &:hover{
         border: 2px #f07b3f solid;
         border-top: none;
@@ -107,13 +109,17 @@ export default function Nav(){
             </Titulo>
             <DivButtons>
                 <DivHome>
-                    <img src={home} alt="" width='15px' height='15px' />
-                    <Links to='/home' activeClassName='active'>Home</Links>
+                    <img src={recipes} alt="" width='20px' height='20px' />
+                    <Links to='/home' activeClassName='active'>Recipes</Links>
                 </DivHome>
                 <DivCreate>
-                    <img src={create} alt="" width='15px' height='15px' />
+                    <img src={create} alt="" width='20px' height='20px' />
                 <Links to='/create' activeClassName='active'>Create</Links>
                 </DivCreate>
+                <DivHome>
+                    <img src={favorite} alt="" width='20px' height='20px' />
+                    <Links to='/favorite' activeClassName='active'>Favorites</Links>
+                </DivHome>
             </DivButtons>
             <SearchBar />
         </Navi>
