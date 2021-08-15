@@ -10,6 +10,8 @@ import getDiets from '../../actions/getDiets'
 import { useDispatch, useSelector } from 'react-redux'
 import loader from '../../media/loader3.gif'
 import video1 from '../../media/video.mp4'
+import imgHome1 from '../../media/home img/receta.jpg'
+import imgHome2 from '../../media/home img/fondo.jpg'
 
 //Styled-components
 
