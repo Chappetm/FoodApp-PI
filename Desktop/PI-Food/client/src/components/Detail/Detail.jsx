@@ -60,6 +60,7 @@ const H2 = styled.h2`
     text-align: center;
     color: #f07b3f;
     width: 100%;
+    text-transform: capitalize;
 `;
 
 const H4 = styled.h4`
@@ -164,6 +165,12 @@ export default function Detail(props){
         return  {__html: detail.summary};
     }
 
+    if(detail.diets && typeof detail.diets[0] === 'object'){
+        var diet = detail.diets.map(el => el.name)
+    } else {
+        var diet = detail.diets
+    }
+
     return (
         <Contenedor>
             <Nav />
@@ -192,11 +199,11 @@ export default function Detail(props){
                                 <DivTitulos><img src={serving} width='30px' height='30px'/><H4> Servings:</H4> <p>{detail.servings}</p></DivTitulos>
                                 <DivDiets>
                                     <DivTitulos><img src={diets} width='30px' height='30px'/><H4>Diets:</H4></DivTitulos>
-                                    <Ul>{
+                                    {
                                         detail.diets
-                                            ? detail.diets.map(d => <li>{d}</li>)
+                                            ? <Ul>{diet.map(d => <li>{d}</li>)}</Ul>
                                             : <span>No diets</span> 
-                                    }</Ul>
+                                    }
                                 </DivDiets>
                             </DivCentral1>
                             <DivCentral2>
@@ -212,8 +219,10 @@ export default function Detail(props){
                         <DivSummary>
                             <DivTitulos><img src={steps} width='30px' height='30px' /><H4> Steps:</H4></DivTitulos>
                             {
-                                (typeof detail.analyzedInstructions  === 'object')
-                                ? <ul>{detail.analyzedInstructions.map(d => <li>{d}</li>)}</ul>
+                                (detail.analyzedInstructions) 
+                                ? (typeof detail.analyzedInstructions  === 'object')
+                                    ? <ul>{detail.analyzedInstructions.map(d => <li>{d}</li>)}</ul>
+                                    : <p>{detail.analyzedInstructions}</p>
                                 : <p>No steps</p>
                             }
                         </DivSummary>

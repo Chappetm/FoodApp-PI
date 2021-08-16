@@ -16,16 +16,22 @@ export default function reducer(state = initialState, action){
                 recipesLoaded: action.payload,
                 allRecipes: action.payload
             }
-        case GET_QUERY: 
+        case GET_QUERY:
             return {
                 ...state,
                 recipesLoaded: action.payload,
                 allRecipes: action.payload
             }
         case GET_ID:
+            if(action.payload.length){
+                var obj = action.payload[0]
+            } else {
+                var obj = action.payload
+            }
+            console.log(obj)
             return {
                 ...state,
-                recipeDetail: action.payload
+                recipeDetail: obj
             }
         case POST_RECIPE:
             return {

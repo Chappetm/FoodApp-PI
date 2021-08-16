@@ -59,8 +59,8 @@ export default function Filter({setCurrentPage, setOrder}) {
                 }
             </Select>
             <Select onChange={(e) => {handleSortName(e)}}>
-                <Option value='asc'>Name ↑</Option>
-                <Option value='desc'>Name ↓</Option>
+                <Option value='asc'>A-Z</Option>
+                <Option value='desc'>Z-A</Option>
             </Select>
             <Select onChange={(e) => {handleSortScore(e)}}>
                 <Option value='asc'>Score ↑</Option>

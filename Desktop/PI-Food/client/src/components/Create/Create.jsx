@@ -231,6 +231,8 @@ export default function Create(params) {
         spoonacularScore: '',
         healthScore: '',
         analyzedInstructions: '',
+        readyInMinutes: '',
+        servings: '',
         diets: []
     })
 
@@ -269,6 +271,8 @@ export default function Create(params) {
             spoonacularScore: '',
             healthScore: '',
             analyzedInstructions: '',
+            readyInMinutes: '',
+            servings: '',
             diets: []
         })
     }
@@ -284,6 +288,16 @@ export default function Create(params) {
                             <DivLabel>
                                 <Input name='title' type="text" id='name' placeholder='Recipe name:' value={info.title} onChange={(e) => handleChange(e)}/>
                                 <Label for='name'>Recipe name*</Label>
+                            </DivLabel>
+                            <br />
+                            <DivLabel>
+                                <Input name='servings' type="number" id='servings' placeholder='Recipe name:' value={info.servings} onChange={(e) => handleChange(e)}/>
+                                <Label for='servings'>Servings</Label>
+                            </DivLabel>
+                            <br />
+                            <DivLabel>
+                                <Input name='readyInMinutes' type="number" id='readyInMinutes' placeholder='Recipe name:' value={info.readyInMinutes} onChange={(e) => handleChange(e)}/>
+                                <Label for='readyInMinutes'>Coocking time</Label>
                             </DivLabel>
                             <br />
                             <DivLabel>
@@ -315,10 +329,14 @@ export default function Create(params) {
                                 <span>100</span>
                             </DivRange>
                             <br />
-                            <DivLabel>
-                                <InputRange name='healthScore' value='0' type="range" min="0" max="100" placeholder='Health Score:' id='health' value={info.healthScore} onChange={(e) => handleChange(e)}/>
-                                <Label for='health'>Health Score</Label>
-                            </DivLabel>
+                            <DivRange>
+                                <span>0</span>
+                                <DivLabel>
+                                    <InputRange name='healthScore' value='0' type="range" min="0" max="100" placeholder='Health Score:' id='health' value={info.healthScore} onChange={(e) => handleChange(e)}/>
+                                    <Label for='health'>Health Score</Label>
+                                </DivLabel>
+                                <span>100</span>
+                            </DivRange>
                             <br />
                             <DivLabel>
                                 <InputTextarea name='analyzedInstructions' type="text" placeholder='Steps:' id='analyzedInstructions' value={info.analyzedInstructions}onChange={(e) => handleChange(e)}/>
