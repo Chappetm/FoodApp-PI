@@ -6,42 +6,74 @@ const axios = require('axios');
 
 const router = Router();
 
-router.get('/', async (req, res) => {     //GET /recipes?name="..."
-    // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
-    // Si no existe ninguna receta mostrar un mensaje adecuado
-    const { name } = req.query;
-    //-------------Version con query name--------------------------
-    if(name){
-        const respDb = await Recipe.findAll({    //Busca en el model 'Recipe'
-            where: {
-                title: {[Op.substring]: name}    //En la columna name debe estar el 'name'
-            }, 
-            include: {                      //Join con el model 'Diet'
-                model: Diet,
-                attributes: ['name'],
-                through: {
-                    attributes: []
-                }
-            }
-        }) 
+// router.get('/', async (req, res) => {     //GET /recipes?name="..."
+//     // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
+//     // Si no existe ninguna receta mostrar un mensaje adecuado
+//     const { name } = req.query;
+//     //-------------Version con query name--------------------------
+//     if(name){
+//         const respDb = await Recipe.findAll({    //Busca en el model 'Recipe'
+//             where: {
+//                 title: {[Op.substring]: name}    //En la columna name debe estar el 'name'
+//             }, 
+//             include: {                      //Join con el model 'Diet'
+//                 model: Diet,
+//                 attributes: ['name'],
+//                 through: {
+//                     attributes: []
+//                 }
+//             }
+//         }) 
         
-        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true&number=10`) //Busca en la api con el query 'name'
+//         const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&query=${name}&addRecipeInformation=true&number=10`) //Busca en la api con el query 'name'
         
-        const respTotal = respDb.concat(respApi.data.results)
+//         const respTotal = respDb.concat(respApi.data.results)
 
-        if(respTotal.length){
-            res.status(200).json(respTotal);   //Devuelve los arreglos concatenados
-        } else{
-            res.status(400).send('No existe receta relacionada')  //Devuelve error 
+//         if(respTotal.length){
+//             res.status(200).json(respTotal);   //Devuelve los arreglos concatenados
+//         } else{
+//             res.status(400).send('No existe receta relacionada')  //Devuelve error 
+//         }
+
+//     } else {
+//         const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true&number=50`)
+//         const result = respApi.data.results
+//         res.status(200).send(result); //Si no pasan un 'name' por query, responde con las 10 primeras recetas
+//     }
+//     //---------------------------------------------------
+
+// })
+
+router.get('/', async (req, res) => {
+    const {name} = req.query;
+
+    const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true&number=20`)
+    const finalApi = respApi.data.results
+    const respDb = await Recipe.findAll({    //Busca en el model 'Recipe'
+        where: {
+            title: {[Op.substring]: name}    //En la columna name debe estar el 'name'
+        }, 
+        include: {                      //Join con el model 'Diet'
+            model: Diet,
+            attributes: ['name'],
+            through: {
+                attributes: []
+            }
         }
+    }) 
+
+    const finalResponse = await respDb.concat(finalApi)
+
+    if(name){
+        const filterName = finalResponse.filter(el => el.title.toLowerCase().includes(name.toLowerCase()))
+
+        filterName.length 
+        ? res.status(200).send(filterName)
+        : res.status(404).send('No se encontro receta')
 
     } else {
-        const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true&number=50`)
-        const result = respApi.data.results
-        res.status(200).send(result); //Si no pasan un 'name' por query, responde con las 10 primeras recetas
+        res.status(200).send(finalResponse)
     }
-    //---------------------------------------------------
-
 })
 
 router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
@@ -68,16 +100,22 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
             analyzedInstructions: (finalResponse.analyzedInstructions.length > 0) ? finalResponse.analyzedInstructions[0].steps.map(e => e.step) : "No se encontraron datos"
             //Comprobamos si tiene instrucciones, si las tiene entramos al obj ([0]) y a la propiedad 'steps' para mapearla y conseguir todos los pasos ('step'). Si no las tiene se llena con 'no hay datos'
         }
+        console.log(idRecipe)
         res.status(200).send(idRecipe)
     } else {
         const response = await Recipe.findAll({
             where: {
                 id: id
             },
-            include: Diet
+            include: {                      //Join con el model 'Diet'
+                model: Diet,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }
         })
-
-        res.status(200).send(response[0])
+        res.status(200).send(response)
     }
 
 })  
