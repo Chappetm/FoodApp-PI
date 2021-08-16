@@ -70,6 +70,7 @@ const Cardiv = styled(Link)`
         width: 330px;
         object-fit: fill;
     `;
+    
 //-------------------------------------
 
 export default function Card({title, image, diet, id}){
@@ -79,16 +80,17 @@ export default function Card({title, image, diet, id}){
     }
 
     return (
-       <Cardiv to={`/detail/${id}`}>
-        <DivImg>
-            <Img src={image} alt="img not found" />
-        </DivImg>
-        <DivH3>
-            <H3>{title}</H3>
-        </DivH3>
-        <Diet>
-            <ul>{diet.map(d => <li>{d}</li>)}</ul>
-        </Diet>
-       </Cardiv> 
+        <Cardiv to={`/detail/${id}`}>
+            
+            <DivImg>
+                <Img src={image} alt="img not found" />
+            </DivImg>
+            <DivH3>
+                <H3>{title}</H3>
+            </DivH3>
+            <Diet>
+                <ul>{diet.map(d => <li>{d}</li>)}</ul>
+            </Diet>
+        </Cardiv> 
     )
 }

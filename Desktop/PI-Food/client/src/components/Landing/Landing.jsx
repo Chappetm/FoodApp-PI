@@ -7,7 +7,6 @@ import video2 from '../../media/background2.mp4'
 //Styled-components
 
 const Body = styled.div`
-        background-size: cover;
         margin: 0;
         padding: 0;
         height: 100%;

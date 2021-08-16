@@ -225,6 +225,14 @@ const LabelSelect = styled.label`
     margin: 10px;
 `;
 
+const DivImg = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-right: 20%;
+`;
+
 //------------------------------------------------
 
 export default function Create(params) {
@@ -236,6 +244,7 @@ export default function Create(params) {
         analyzedInstructions: '',
         readyInMinutes: '',
         servings: '',
+        image: '',
         diets: []
     })
 
@@ -275,6 +284,7 @@ export default function Create(params) {
             analyzedInstructions: '',
             readyInMinutes: '',
             servings: '',
+            image: [],
             diets: []
         })
     }
@@ -344,10 +354,20 @@ export default function Create(params) {
                                 <InputTextarea name='analyzedInstructions' type="text" placeholder='Steps:' id='analyzedInstructions' value={info.analyzedInstructions}onChange={(e) => handleChange(e)}/>
                                 <Label for='analyzedInstructions'>Steps</Label>
                             </DivLabel>
-                            <br />
-                            <br />
+                            <DivLabel>
+                                <Input name='image' type="text" id='image' placeholder='Image:' value={info.image} onChange={(e) => handleChange(e)}/>
+                                <Label for='image'>Image (URL)</Label>
+                            </DivLabel>
                         </Div1>
                     </DivRow>
+                    <DivImg>{
+                                info.image
+                                ?<img src={info.image} width='120px' height='120px'/>
+                                : <span>No image</span>
+                            }
+                    </DivImg>
+                    <br />
+                    <br />
                     <DivButton>
                             <Button type="submit" >CREATE RECIPE</Button>
                     </DivButton>

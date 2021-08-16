@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
 import getRecipeId from '../../actions/getRecipeId';
+import addFavorite from '../../actions/addFavorite';
 import loader from '../../media/loader3.gif'
 import porciones from '../../media/cubiertos.png'
 import world from '../../media/worldwide.png'
@@ -150,6 +151,22 @@ const Ul = styled.ul`
     margin: 0;
 `;
 
+const ButtonFav = styled.button`
+background-color: #f07b3f;
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #f07b3f;
+    box-shadow: 5px 5px 20px lightgray;
+    color: white;
+    font-family: 'Raleway';
+    font-weight: 700;
+    &:hover{
+        background-color: #BD6537
+    }
+`;
+
 //-------------------------------------
 
 export default function Detail(props){
@@ -169,6 +186,12 @@ export default function Detail(props){
         var diet = detail.diets.map(el => el.name)
     } else {
         var diet = detail.diets
+    }
+
+    const handleClic = (e) => {
+        e.preventDefault()
+        dispatch(addFavorite(detail.id))
+        alert('Recipe add to favorites')
     }
 
     return (
@@ -226,9 +249,12 @@ export default function Detail(props){
                                 : <p>No steps</p>
                             }
                         </DivSummary>
+                        <br />
+                        <br />
+                        <ButtonFav onClick={(e) => handleClic(e)}>ADD TO FAVORITES</ButtonFav>
+                        <br />
                     </Principal>
             }
-            
             <Footer />
         </Contenedor>
     )

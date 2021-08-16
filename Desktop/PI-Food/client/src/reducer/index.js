@@ -1,11 +1,12 @@
-import { GET_DIETS, GET_ID, GET_QUERY, GET_RECIPES, POST_RECIPE, FILTER_BY_DIET, ORDER_BY_NAME, ORDER_BY_SCORE } from "../actions"
+import { GET_DIETS, GET_ID, GET_QUERY, GET_RECIPES, POST_RECIPE, FILTER_BY_DIET, ORDER_BY_NAME, ORDER_BY_SCORE, ADD_FAVORITE } from "../actions"
 
 const initialState = {
     recipesLoaded: [],
     recipeDetail: [],
     newRecipe: [],
     diets: [],
-    allRecipes: []
+    allRecipes: [],
+    favoriteRecipes: []
 }
 
 export default function reducer(state = initialState, action){
@@ -28,7 +29,6 @@ export default function reducer(state = initialState, action){
             } else {
                 var obj = action.payload
             }
-            console.log(obj)
             return {
                 ...state,
                 recipeDetail: obj
@@ -83,7 +83,6 @@ export default function reducer(state = initialState, action){
                 ...state,
                 recipesLoaded: sort
             }
-
         case ORDER_BY_SCORE:
             let todas = state.allRecipes
             let order = action.payload === 'asc' ? todas.sort(function(a, b){
@@ -107,7 +106,12 @@ export default function reducer(state = initialState, action){
                 ...state,
                 recipesLoaded: order
             }
-            
+        case ADD_FAVORITE:
+            const fav = state.allRecipes.filter(el => el.id === action.payload)
+            return {
+                ...state,
+                favoriteRecipes: [...state.favoriteRecipes, fav]
+            }
         default: 
             return state
     }
