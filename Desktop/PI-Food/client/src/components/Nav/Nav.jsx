@@ -97,9 +97,12 @@ const Links = styled(NavLink)`
 //---------------------------------------
 
 export default function Nav(){
-    
-    const dispatch = useDispatch()
 
+    const dispatch = useDispatch();
+
+    const todasRecetas = () => {
+        dispatch(getRecipes())
+    }
 
     return (
         <Navi>
@@ -110,11 +113,11 @@ export default function Nav(){
             <DivButtons>
                 <DivHome>
                     <img src={recipes} alt="" width='20px' height='20px' />
-                    <Links to='/home' activeClassName='active'>Recipes</Links>
+                    <Links to='/home' activeClassName='active' onClick={todasRecetas}>Recipes</Links>
                 </DivHome>
                 <DivCreate>
                     <img src={create} alt="" width='20px' height='20px' />
-                <Links to='/create' activeClassName='active'>Create</Links>
+                    <Links to='/create' activeClassName='active'>Create</Links>
                 </DivCreate>
                 <DivHome>
                     <img src={favorite} alt="" width='20px' height='20px' />

@@ -36,6 +36,8 @@ const H1 = styled.h1`
     text-align: center;
     margin: 30px;
     font-weight: 500;
+    font-family: 'Pacifico';
+    color: #626262;
 `;
 
 const DivLabel = styled.div`
@@ -64,6 +66,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input` 
+    text-transform: capitalize;
     font-size: 20px;
     width: 100%;
     border-style: none none solid none;
@@ -249,7 +252,6 @@ export default function Create(params) {
             ...info,
             [e.target.name]: e.target.value
         })
-        console.log(typeof info)
     }
 
     const handleDiets = (e) => {

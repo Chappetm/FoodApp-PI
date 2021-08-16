@@ -58,7 +58,7 @@ const H2 = styled.h2`
     font-size: 45px;
     font-weight: 100;
     text-align: center;
-    color: #f07b3f;
+    color:#626262;
     width: 100%;
     text-transform: capitalize;
 `;
