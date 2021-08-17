@@ -19,9 +19,18 @@ const Contenedor = styled.div`
 const Title = styled.h1`
     text-align: center;
     margin: 30px;
+    font-size: 60px;
     font-weight: 500;
     font-family: 'Pacifico';
     color: #626262;
+`;
+
+const DivFav = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 `;
 
 export default function Fav(){
@@ -31,7 +40,7 @@ export default function Fav(){
         <Contenedor>
             <Nav />
             <Title>Favorites</Title>
-            <div>
+            <DivFav>
             {
                 fav.map(r => <Card 
                     title={r.title}
@@ -40,7 +49,8 @@ export default function Fav(){
                     id={r.id}
                 />)
             }
-            </div>
+            </DivFav>
+            <br />
             <Footer />
         </Contenedor>
 

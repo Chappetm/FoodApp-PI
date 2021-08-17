@@ -110,7 +110,7 @@ export default function reducer(state = initialState, action){
             const fav = state.allRecipes.filter(el => el.id === action.payload)
             return {
                 ...state,
-                favoriteRecipes: [...state.favoriteRecipes, fav]
+                favoriteRecipes: [...state.favoriteRecipes, fav[0]]
             }
         default: 
             return state

@@ -35,6 +35,7 @@ const Form = styled.form`
 const H1 = styled.h1`
     text-align: center;
     margin: 30px;
+    font-size: 60px;
     font-weight: 500;
     font-family: 'Pacifico';
     color: #626262;
@@ -86,11 +87,15 @@ const Input = styled.input`
     &:not(:placeholder-shown) + Label {
         transform: translateY(-2.5em) scale(.7)
     }
-    &:invalid + Label{
-        color: red;
+    &:focus + Label {
+        &:after{
+            font-size: 15px;
+            content: " (" attr(data-help) ")";
+        }
     }
-    &:not(:focus, :required):invalid + Label:after{
-        content: '  (Ingresar titulo de la receta)';
+    &:focus:invalid + Label{
+        color: red;
+    
     }
     /* &:valid + Label:after{
         content: '   ✔';
@@ -119,6 +124,9 @@ const InputTextarea = styled.textarea`
     &:focus + Label, 
     &:not(:placeholder-shown) + Label {
         transform: translateY(-3.6em) scale(.7)
+    }
+    &:focus:invalid + Label{
+        color: red;
     }
 `;
 
@@ -275,7 +283,7 @@ export default function Create(params) {
     async function handleSubmit(e){
         e.preventDefault()
         await dispatch(createRecipe(info));
-        alert('Recipe created')
+        alert(`${info.title} created`)
         setInfo({
             title: '',
             summary: '',
@@ -298,22 +306,22 @@ export default function Create(params) {
                     <DivRow>
                         <Div1>
                             <DivLabel>
-                                <Input name='title' type="text" id='name' placeholder='Recipe name:' value={info.title} onChange={(e) => handleChange(e)}/>
-                                <Label for='name'>Recipe name*</Label>
+                                <Input required name='title' type="text" id='name' placeholder='Recipe name:' value={info.title} onChange={(e) => handleChange(e)}/>
+                                <Label for='name' data-help='Only letters are acepted'>Recipe name*</Label>
                             </DivLabel>
                             <br />
                             <DivLabel>
-                                <Input name='servings' type="number" id='servings' placeholder='Recipe name:' value={info.servings} onChange={(e) => handleChange(e)}/>
-                                <Label for='servings'>Servings</Label>
+                                <Input name='servings' type="number" id='servings' placeholder='Recipe name:' value={info.servings} min='0' max='10' onChange={(e) => handleChange(e)}/>
+                                <Label for='servings' data-help='Numbers between 0 and 10'>Servings</Label>
                             </DivLabel>
                             <br />
                             <DivLabel>
-                                <Input name='readyInMinutes' type="number" id='readyInMinutes' placeholder='Recipe name:' value={info.readyInMinutes} onChange={(e) => handleChange(e)}/>
-                                <Label for='readyInMinutes'>Coocking time</Label>
+                                <Input name='readyInMinutes' type="number" id='readyInMinutes' placeholder='Recipe name:' value={info.readyInMinutes} min='0' max='1000' onChange={(e) => handleChange(e)}/>
+                                <Label for='readyInMinutes' data-help='Numbers between 0 and 1000'>Coocking time</Label>
                             </DivLabel>
                             <br />
                             <DivLabel>
-                                <InputTextarea name='summary' type="text" placeholder='Summary:' id='summary' value={info.summary} onChange={(e) => handleChange(e)}/>
+                                <InputTextarea required name='summary' type="text" placeholder='Summary:' id='summary' value={info.summary} onChange={(e) => handleChange(e)}/>
                                 <Label for='summary'>Summary*</Label>
                             </DivLabel>
                             <br />
@@ -349,14 +357,13 @@ export default function Create(params) {
                                 </DivLabel>
                                 <span>100</span>
                             </DivRange>
-                            <br />
                             <DivLabel>
                                 <InputTextarea name='analyzedInstructions' type="text" placeholder='Steps:' id='analyzedInstructions' value={info.analyzedInstructions}onChange={(e) => handleChange(e)}/>
                                 <Label for='analyzedInstructions'>Steps</Label>
                             </DivLabel>
                             <DivLabel>
-                                <Input name='image' type="text" id='image' placeholder='Image:' value={info.image} onChange={(e) => handleChange(e)}/>
-                                <Label for='image'>Image (URL)</Label>
+                                <Input name='image' type="url" id='image' placeholder='Image:' value={info.image} onChange={(e) => handleChange(e)}/>
+                                <Label for='image' data-help='URL'>Image</Label>
                             </DivLabel>
                         </Div1>
                     </DivRow>

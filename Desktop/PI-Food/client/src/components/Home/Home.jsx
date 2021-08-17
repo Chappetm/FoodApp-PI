@@ -58,6 +58,15 @@ const Video = styled.video`
     width: 100%;
 `;
 
+const H1 = styled.h1`
+    text-align: center;
+    margin: 30px;
+    font-size: 60px;
+    font-weight: 500;
+    font-family: 'Pacifico';
+    color: #626262;
+`;
+
 //-----------------------------------------
 
 export default function Home(props){
@@ -93,6 +102,7 @@ export default function Home(props){
                             </Video>
                             <DivVideoColor></DivVideoColor>
                         </DivVideoHome>
+                        <H1>Recipes</H1>
                         <Body>
                             <Filter setCurrentPage={setCurrentPage} setOrder={setOrder}/>
                             <Cards currentRecipes={currentRecipes}/>
