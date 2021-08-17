@@ -33,6 +33,11 @@ const DivFav = styled.div`
     flex-wrap: wrap;
 `;
 
+const Span = styled.span`
+    font-family: 'Raleway';
+    font-size: 30px;
+`;
+
 export default function Fav(){
     const fav = useSelector(store => store.favoriteRecipes)
 
@@ -40,16 +45,20 @@ export default function Fav(){
         <Contenedor>
             <Nav />
             <Title>Favorites</Title>
-            <DivFav>
             {
-                fav.map(r => <Card 
-                    title={r.title}
-                    image={r.image}
-                    diet={r.diets}
-                    id={r.id}
-                />)
+                fav.length
+                ? <DivFav>
+                {
+                    fav.map(r => <Card 
+                        title={r.title}
+                        image={r.image}
+                        diet={r.diets}
+                        id={r.id}
+                    />)
+                }
+                </DivFav>
+                : <Span>No favorites yet 😔</Span>
             }
-            </DivFav>
             <br />
             <Footer />
         </Contenedor>

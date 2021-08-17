@@ -85,7 +85,8 @@ const Input = styled.input`
     }
     &:focus + Label, 
     &:not(:placeholder-shown) + Label {
-        transform: translateY(-2.5em) scale(.7)
+        transform: translateY(-2.2em) scale(.7);
+        font-size: 25px;
     }
     &:focus + Label {
         &:after{
@@ -95,7 +96,6 @@ const Input = styled.input`
     }
     &:focus:invalid + Label{
         color: red;
-    
     }
     /* &:valid + Label:after{
         content: '   ✔';
@@ -252,6 +252,7 @@ export default function Create(params) {
         analyzedInstructions: '',
         readyInMinutes: '',
         servings: '',
+        cuisines: '',
         image: '',
         diets: []
     })
@@ -292,7 +293,8 @@ export default function Create(params) {
             analyzedInstructions: '',
             readyInMinutes: '',
             servings: '',
-            image: [],
+            cuisines: '',
+            image: '',
             diets: []
         })
     }
@@ -317,7 +319,12 @@ export default function Create(params) {
                             <br />
                             <DivLabel>
                                 <Input name='readyInMinutes' type="number" id='readyInMinutes' placeholder='Recipe name:' value={info.readyInMinutes} min='0' max='1000' onChange={(e) => handleChange(e)}/>
-                                <Label for='readyInMinutes' data-help='Numbers between 0 and 1000'>Coocking time</Label>
+                                <Label for='readyInMinutes' data-help='In minutes'>Coocking time</Label>
+                            </DivLabel>
+                            <br />
+                            <DivLabel>
+                                <Input name='cuisines' type="text" id='cuisines' placeholder='Recipe name:' value={info.cuisines} onChange={(e) => handleChange(e)}/>
+                                <Label for='cuisines' data-help='Only letters are acepted'>Cuisines</Label>
                             </DivLabel>
                             <br />
                             <DivLabel>

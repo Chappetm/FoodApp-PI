@@ -167,6 +167,10 @@ background-color: #f07b3f;
     }
 `;
 
+const Li = styled.li`
+    text-transform: capitalize;
+`;
+
 //-------------------------------------
 
 export default function Detail(props){
@@ -233,8 +237,12 @@ export default function Detail(props){
                                 <DivTitulos><img src={score} width='30px' height='30px'/><H4> Score:</H4> <p>{detail.spoonacularScore}</p></DivTitulos>
                                 <DivTitulos><img src={healthScore} width='30px' height='30px'/><H4> Health score: </H4><p>{detail.healthScore}</p></DivTitulos>
                                 <DivTitulos><img src={world} width='30px' height='30px'/><H4> Cuisines:</H4></DivTitulos>
-                                    {(detail.cuisines) 
-                                    ? <ul>{detail.cuisines.map(el => <li>{el}</li>)}</ul> : <p>-</p>}
+                                    {(detail.cuisines && typeof detail.cuisines === 'object') 
+                                    ? <ul>{detail.cuisines.map(el => <Li>{el}</Li>)}</ul> 
+                                    : detail.cuisines
+                                        ? <ul><Li>{detail.cuisines}</Li></ul>
+                                        : <p>-</p>
+                                    }
                             </DivCentral2>
                         </DivCentral>
                         <br />
