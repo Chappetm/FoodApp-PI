@@ -53,6 +53,7 @@ export default function Fav(){
                         return <CardFav 
                                     title={r.title}
                                     image={r.image}
+                                    id={r.id}
                                 />
                     })
                     : <Span>No favorites yet 😔</Span>

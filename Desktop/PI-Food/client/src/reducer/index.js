@@ -1,4 +1,4 @@
-import { GET_DIETS, GET_ID, GET_QUERY, GET_RECIPES, POST_RECIPE, FILTER_BY_DIET, ORDER_BY_NAME, ORDER_BY_SCORE, ADD_FAVORITE } from "../actions"
+import { GET_DIETS, GET_ID, GET_QUERY, GET_RECIPES, POST_RECIPE, FILTER_BY_DIET, ORDER_BY_NAME, ORDER_BY_SCORE, ADD_FAVORITE, REMOVE_FAVORITE } from "../actions"
 
 const initialState = {
     recipesLoaded: [],
@@ -111,6 +111,12 @@ export default function reducer(state = initialState, action){
             return {
                 ...state,
                 favoriteRecipes: [...state.favoriteRecipes, fav[0]]
+            }
+        case REMOVE_FAVORITE:
+            const filtrado = state.favoriteRecipes.filter(el => el.id !== action.payload)
+            return {
+                ...state,
+                favoriteRecipes: filtrado
             }
         default: 
             return state

@@ -241,10 +241,23 @@ const DivImg = styled.div`
     margin-right: 20%;
 `;
 
-
 //------------------------------------------------
 
-export default function Create(params) {
+// export function validate(input) {
+//     let errors = {};
+
+//     if(!input.title){
+//         errors.title = 'Recipe name is required'
+//     }
+
+//     if(!input.summary){
+//         errors.summary = 'Summary name is required'
+//     }
+
+//     return errors;
+// };
+
+export default function Create() {
     const [ info, setInfo ] = useState({
         title: '',
         summary: '',
@@ -257,6 +270,7 @@ export default function Create(params) {
         image: '',
         diets: []
     })
+    // const [ errors, setErrors ] = useState({})
 
     const dietas = useSelector(store => store.diets)
 
@@ -271,6 +285,10 @@ export default function Create(params) {
             ...info,
             [e.target.name]: e.target.value
         })
+        // setErrors(validate({
+        //     ...info,
+        //     [e.target.name]: e.target.value
+        // }))
     }
 
     const handleDiets = (e) => {
@@ -299,7 +317,6 @@ export default function Create(params) {
             diets: []
         })
     }
-
     return (
         <Contenedor>
             <Nav />
@@ -309,13 +326,14 @@ export default function Create(params) {
                     <DivRow>
                         <Div1>
                             <DivLabel>
-                                <Input required name='title' type="text" id='name' placeholder='Recipe name:' value={info.title} onChange={(e) => handleChange(e)}/>
+                                <Input name='title' required type="text" id='name' placeholder='Recipe name:' value={info.title} onChange={(e) => handleChange(e)}/>
                                 <Label for='name' data-help='Only letters are acepted'>Recipe name*</Label>
                             </DivLabel>
+                            {/* {errors.title && (<p>{errors.title}</p>)} */}
                             <br />
                             <DivLabel>
-                                <Input name='servings' type="number" id='servings' placeholder='Recipe name:' value={info.servings} min='0' max='10' onChange={(e) => handleChange(e)}/>
-                                <Label for='servings' data-help='Numbers between 0 and 10'>Servings</Label>
+                                <Input name='servings' type="number" id='servings' placeholder='Recipe name:' value={info.servings} min='1' max='10' onChange={(e) => handleChange(e)}/>
+                                <Label for='servings' data-help='Numbers between 1 and 10'>Servings</Label>
                             </DivLabel>
                             <br />
                             <DivLabel>
@@ -332,6 +350,7 @@ export default function Create(params) {
                                 <InputTextarea required name='summary' type="text" placeholder='Summary:' id='summary' value={info.summary} onChange={(e) => handleChange(e)}/>
                                 <Label for='summary'>Summary*</Label>
                             </DivLabel>
+                            {/* {errors.summary && (<p>{errors.summary}</p>)} */}
                             <br />
                             <DivSelect>
                                 <LabelSelect>Diet</LabelSelect>

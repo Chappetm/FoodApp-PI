@@ -7,7 +7,7 @@ import gmail from '../../media/gmail.png'
 //Styled-components
 
 const DivFooter = styled.footer`
-    height: 290px;
+    height: 300px;
     width: 100%;
     background-color: #141414;
     color: #aaa;
