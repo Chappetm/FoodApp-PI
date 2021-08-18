@@ -15,8 +15,6 @@ const Body = styled.div`
 //----------------------------------------
 
 export default function Cards({currentRecipes}){
-    
-    const recipes = useSelector(store => store.recipesLoaded)
 
     return (
         <Body>
@@ -25,6 +23,7 @@ export default function Cards({currentRecipes}){
                     title={r.title}
                     image={r.image}
                     diet={r.diets}
+                    score={r.spoonacularScore}
                     id={r.id}
                 />)}
         </Body>
