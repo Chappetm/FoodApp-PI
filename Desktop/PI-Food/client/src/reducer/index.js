@@ -61,7 +61,7 @@ export default function reducer(state = initialState, action){
                 recipesLoaded: filter
             }
         case ORDER_BY_NAME:
-            let all = state.allRecipes
+            let all = state.recipesLoaded
             let sort = action.payload === 'asc' ? all.sort(function(a, b){
                 if(a.title > b.title){
                     return 1
@@ -84,7 +84,7 @@ export default function reducer(state = initialState, action){
                 recipesLoaded: sort
             }
         case ORDER_BY_SCORE:
-            let todas = state.allRecipes
+            let todas = state.recipesLoaded
             let order = action.payload === 'asc' ? todas.sort(function(a, b){
                 if(a.spoonacularScore > b.spoonacularScore){
                     return 1

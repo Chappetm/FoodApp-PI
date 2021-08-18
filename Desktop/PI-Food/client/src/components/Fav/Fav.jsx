@@ -58,9 +58,8 @@ export default function Fav(){
                     })
                     : <Span>No favorites yet 😔</Span>
                 }
-                <br />
             </DivFav>
-            
+            <br />
             <Footer />
         </Contenedor>
 

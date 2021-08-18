@@ -131,7 +131,7 @@ export default function Landing(props){
                     </Hcontenedor>
                 </Titulo2>
                 <Boton>
-                    <H3 to='/home'>Clic Here</H3>
+                    <H3 to='/home'>Click Here</H3>
                 </Boton>
             </Titulo>
         </Body>

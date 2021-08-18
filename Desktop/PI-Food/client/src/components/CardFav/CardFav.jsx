@@ -27,7 +27,7 @@ const DivImg = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    height: 60%;
+    height: 50%;
     overflow: hidden;
 `;
 
@@ -50,20 +50,19 @@ const Img = styled.img`
 
 const ButtonDelete = styled.button`
     padding: 3px;
-    margin: 3px;
     width: 74%;
     top: 60%;
-    background-color: #f07b3f;
+    background-color: rgba(255, 255, 255, 0.9);;
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid #f07b3f;
-    color: rgba(255, 255, 255, 0.9);
+    color: #f07b3f;
     font-family: 'Raleway';
     font-weight: 700;
     font-size: 1em;
     :hover {
         color: rgba(255, 255, 255, 1);
-        box-shadow: 0 4px 16px #f07b3f;
+        background-color: #f07b3f;
         transition: all 0.8s ease;
     }
 `;
@@ -72,20 +71,20 @@ const ButtonDetail = styled(Link)`
     text-decoration:none;
     text-align: center;
     padding: 3px;
-    margin: 3px;
-    width: 74%;
+    margin: 10px;
+    width: 71%;
     top: 40%;
-    background-color: #f07b3f;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid #f07b3f;
-    color: rgba(255, 255, 255, 0.9);
+    color: #f07b3f;
     font-family: 'Raleway';
     font-weight: 700;
     font-size: 1em;
     :hover {
         color: rgba(255, 255, 255, 1);
-        box-shadow: 0 4px 16px #f07b3f;
+        background-color: #f07b3f;
         transition: all 0.8s ease;
     }
 `;
@@ -102,11 +101,11 @@ export default function CardFav({title, image, id}){
     return (
         <Card>
             <DivImg>
-                    <Img src={image} />
-                </DivImg>
-                <DivH1>
-                    <H1>{title}</H1>
-                </DivH1>
+                <Img src={image} />
+            </DivImg>
+            <DivH1>
+                <H1>{title}</H1>
+            </DivH1>
             <ButtonDelete onClick={handleClick}>Remove to Favorites</ButtonDelete>
             <ButtonDetail to={`/detail/${id}`}>Details</ButtonDetail>
         </Card>
