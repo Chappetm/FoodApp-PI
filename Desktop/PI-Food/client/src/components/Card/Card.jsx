@@ -77,7 +77,7 @@ const Cardiv = styled(Link)`
         font-size: 20px;
         font-weight: 100;
         top: -28%;
-        right: 30%;
+        right: 32%;
         color: #f07b3f;
     `;
 
@@ -95,7 +95,7 @@ export default function Card({title, image, diet, score, id}){
     if(typeof diet[0] === 'object'){
         diet = diet.map(el => el.name)
     }
-    console.log(score)
+    
     return (
         <Cardiv to={`/detail/${id}`}>
             <DivImg>

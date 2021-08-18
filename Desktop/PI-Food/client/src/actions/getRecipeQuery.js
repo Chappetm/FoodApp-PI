@@ -5,6 +5,7 @@ export default function getRecipeQuery(name){
     return async function(dispatch){
         try {
             const response = await axios.get(`http://localhost:3001/recipe?name=${name}`)
+            console.log(response)
             dispatch({
                 type: GET_QUERY,
                 payload: response.data

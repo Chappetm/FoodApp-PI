@@ -12,20 +12,27 @@ const Body = styled.div`
         justify-content: center;
     `;
 
+const Span = styled.span`
+    margin: 100px;
+    font-size: 30px;
+    font-family: 'Raleway';
+`;
+
 //----------------------------------------
 
 export default function Cards({currentRecipes}){
-
     return (
         <Body>
-            {
-                currentRecipes.map(r => <Card 
-                    title={r.title}
-                    image={r.image}
-                    diet={r.diets}
-                    score={r.spoonacularScore}
-                    id={r.id}
-                />)}
+            {   currentRecipes && typeof currentRecipes === 'object'
+                ?   currentRecipes.map(r => <Card 
+                        title={r.title}
+                        image={r.image}
+                        diet={r.diets}
+                        score={r.spoonacularScore}
+                        id={r.id}
+                    />)
+                :   <Span>No se encontraron recetas 🥱</Span>
+            }
         </Body>
     )
 }
