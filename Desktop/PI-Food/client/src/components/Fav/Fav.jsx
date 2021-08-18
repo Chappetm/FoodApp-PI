@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from '../Nav/Nav'
 import Footer from '../Footer/Footer'
 import styled from 'styled-components'
-import Card from '../Card/Card'
+import CardFav from '../CardFav/CardFav'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -45,18 +45,17 @@ export default function Fav(){
         <Contenedor>
             <Nav />
             <Title>Favorites</Title>
+            <DivFav>
+
+            </DivFav>
             {
                 fav.length
-                ? <DivFav>
-                {
-                    fav.map(r => <Card 
-                        title={r.title}
-                        image={r.image}
-                        diet={r.diets}
-                        id={r.id}
-                    />)
-                }
-                </DivFav>
+                ? fav.map(r => {
+                    return <CardFav 
+                                title={r.title}
+                                image={r.image}
+                            />
+                })
                 : <Span>No favorites yet 😔</Span>
             }
             <br />

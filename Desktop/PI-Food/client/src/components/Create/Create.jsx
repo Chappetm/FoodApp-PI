@@ -241,6 +241,7 @@ const DivImg = styled.div`
     margin-right: 20%;
 `;
 
+
 //------------------------------------------------
 
 export default function Create(params) {

@@ -152,7 +152,7 @@ const Ul = styled.ul`
 `;
 
 const ButtonFav = styled.button`
-background-color: #f07b3f;
+    background-color: #f07b3f;
     height: 40px;
     width: 300px;
     border-radius: 5px;

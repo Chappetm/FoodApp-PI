@@ -100,7 +100,9 @@ export default function Home(props){
                             <Video muted autoPlay loop>
                                 <source src={video1} type="video/mp4"/>
                             </Video>
-                            <DivVideoColor></DivVideoColor>
+                            <DivVideoColor>
+                                
+                            </DivVideoColor>
                         </DivVideoHome>
                         <H1>Recipes</H1>
                         <Body>
