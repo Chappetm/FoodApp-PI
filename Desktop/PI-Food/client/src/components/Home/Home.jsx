@@ -52,10 +52,21 @@ const DivVideoColor = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Video = styled.video`
     width: 100%;
+`;
+
+const H1Banner = styled.h1`
+    color: white;
+    font-size: 80px;
+    font-weight: 500;
+    font-family: 'Pacifico';
 `;
 
 const H1 = styled.h1`
@@ -65,6 +76,10 @@ const H1 = styled.h1`
     font-weight: 500;
     font-family: 'Pacifico';
     color: #626262;
+`;
+
+const Span = styled.span`
+    color: #f07b3f;
 `;
 
 //-----------------------------------------
@@ -101,10 +116,10 @@ export default function Home(props){
                                 <source src={video1} type="video/mp4"/>
                             </Video>
                             <DivVideoColor>
-                                
+                                <H1Banner>Discover our <Span>Recipes</Span></H1Banner>
                             </DivVideoColor>
                         </DivVideoHome>
-                        <H1>Recipes</H1>
+                        {/* <H1>Recipes</H1> */}
                         <Body>
                             <Filter setCurrentPage={setCurrentPage} setOrder={setOrder}/>
                             <Cards currentRecipes={currentRecipes}/>

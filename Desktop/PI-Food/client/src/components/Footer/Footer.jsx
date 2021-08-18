@@ -3,12 +3,11 @@ import styled from 'styled-components'
 import git from '../../media/git.png'
 import linkedin from '../../media/linkedin.png'
 import gmail from '../../media/gmail.png'
-import { Link } from 'react-router-dom'
 
 //Styled-components
 
 const DivFooter = styled.footer`
-    height: 270px;
+    height: 290px;
     width: 100%;
     background-color: #141414;
     color: #aaa;
@@ -113,7 +112,7 @@ const A = styled.a`
     }
 `;
 
-const ALinkedin = styled(Link)`
+const ALinkedin = styled.a`
     background-color:#313131;
     display:inline-block;
     line-height:55px;
@@ -128,7 +127,7 @@ const ALinkedin = styled(Link)`
     }
 `;
 
-const AGmail = styled(Link)`
+const AGmail = styled.a`
     background-color:#313131;
     display:inline-block;
     line-height:55px;
@@ -143,7 +142,7 @@ const AGmail = styled(Link)`
     }
 `;
 
-const AGit = styled(Link)`
+const AGit = styled.a`
     background-color:#313131;
     display:inline-block;
     line-height:53px;
@@ -190,7 +189,8 @@ export default function Footer(){
                 <DivRow>
                     <DivAbout>
                         <H6>ABOUT</H6>
-                        <P>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet facilis sed aspernatur omnis, at iusto ipsam natus earum laudantium placeat eius officia exercitationem pariatur optio quo blanditiis excepturi similique officiis.</P>
+                        {/* <P>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet facilis sed aspernatur omnis, at iusto ipsam natus earum laudantium placeat eius officia exercitationem pariatur optio quo blanditiis excepturi similique officiis.</P> */}
+                        <P>Este es un proyecto individual creado en 3 semanas para el bootcamp SoyHenry en el que utilice una Api de recetas para crear una aplicación donde se puede buscar por nombre de receta, ver los detalles de cada una, filtrar por diferentes dietas, ordenar alfabeticamente y por score, guardarlas en favoritos y crear tu propia receta. </P>
                     </DivAbout>
                     <DivFront>
                         <H6>FRONT-END</H6>
@@ -206,7 +206,7 @@ export default function Footer(){
                             <li><A>Node</A></li>
                             <li><A>Sequelize</A></li>
                             <li><A>Express</A></li>
-                            <li><A>Api REST</A></li>
+                            <li><A>Api (Spooncular)</A></li>
                         </Ul>
                     </DivBack>
                     <DivDb>
@@ -224,9 +224,9 @@ export default function Footer(){
                     <DivContact><H6>Contact me:</H6></DivContact>
                     <DivRedes>
                         <UlRow>
-                            <Li><AGit to='https://github.com/Chappetm'><img src={git} width='25px' height='25px'/></AGit></Li>
-                            <Li><ALinkedin to='www.linkedin.com/in/matias-chappet'><img src={linkedin} width='25px' height='25px'/></ALinkedin></Li>
-                            <Li><AGmail to=''><img src={gmail} width='25px' height='25px'/></AGmail></Li>
+                            <Li><AGit href='https://github.com/Chappetm' ><img src={git} width='25px' height='25px'/></AGit></Li>
+                            <Li><ALinkedin href='https://linkedin.com/in/matias-chappet'><img src={linkedin} width='25px' height='25px'/></ALinkedin></Li>
+                            <Li><AGmail href='mailto:matiaschappet@gmail.com'><img src={gmail} width='25px' height='25px'/></AGmail></Li>
                         </UlRow>
                     </DivRedes>
                 </DivRow>

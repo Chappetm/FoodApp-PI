@@ -31,6 +31,7 @@ const DivFav = styled.div`
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    min-height: 300px;
 `;
 
 const Span = styled.span`
@@ -46,19 +47,19 @@ export default function Fav(){
             <Nav />
             <Title>Favorites</Title>
             <DivFav>
-
+                {
+                    fav.length
+                    ? fav.map(r => {
+                        return <CardFav 
+                                    title={r.title}
+                                    image={r.image}
+                                />
+                    })
+                    : <Span>No favorites yet 😔</Span>
+                }
+                <br />
             </DivFav>
-            {
-                fav.length
-                ? fav.map(r => {
-                    return <CardFav 
-                                title={r.title}
-                                image={r.image}
-                            />
-                })
-                : <Span>No favorites yet 😔</Span>
-            }
-            <br />
+            
             <Footer />
         </Contenedor>
 

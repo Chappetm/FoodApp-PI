@@ -23,6 +23,7 @@ const Body = styled.div`
     
     const H3 = styled(Link)`
         font-size: 30px;
+        font-family: 'Raleway';
         padding: 10px;
         text-decoration: none;
         position: relative;
@@ -130,7 +131,7 @@ export default function Landing(props){
                     </Hcontenedor>
                 </Titulo2>
                 <Boton>
-                    <H3 to='/home'>Find Your Recipe</H3>
+                    <H3 to='/home'>Clic Here</H3>
                 </Boton>
             </Titulo>
         </Body>
