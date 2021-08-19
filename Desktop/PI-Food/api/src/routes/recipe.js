@@ -44,16 +44,13 @@ const router = Router();
 
 // })
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res) => {     //GET /recipes/{idReceta}
     const {name} = req.query;
 
-    const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true&number=20`)
+    const respApi = await axios.get(`${URL_RECIPES}${API_KEY}&addRecipeInformation=true&number=50`)
     const finalApi = respApi.data.results
-    const respDb = await Recipe.findAll({    //Busca en el model 'Recipe'
-        where: {
-            title: {[Op.substring]: name}    //En la columna name debe estar el 'name'
-        }, 
-        include: {                      //Join con el model 'Diet'
+    const respDb = await Recipe.findAll({
+        include: {
             model: Diet,
             attributes: ['name'],
             through: {
@@ -69,7 +66,7 @@ router.get('/', async (req, res) => {
 
         filterName.length 
         ? res.status(200).send(filterName)
-        : res.status(404).send('No se encontro receta')
+        : res.status(200).send('No se encontro receta')
 
     } else {
         res.status(200).send(finalResponse)
@@ -97,10 +94,9 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
             cuisines: finalResponse.cuisines,
             healthScore: finalResponse.healthScore,
             spoonacularScore: finalResponse.spoonacularScore,
-            analyzedInstructions: (finalResponse.analyzedInstructions.length > 0) ? finalResponse.analyzedInstructions[0].steps.map(e => e.step) : "No se encontraron datos"
+            analyzedInstructions: (finalResponse.analyzedInstructions.length > 0) ? finalResponse.analyzedInstructions[0].steps.map(e => e.step) : "No steps"
             //Comprobamos si tiene instrucciones, si las tiene entramos al obj ([0]) y a la propiedad 'steps' para mapearla y conseguir todos los pasos ('step'). Si no las tiene se llena con 'no hay datos'
         }
-        console.log(idRecipe)
         res.status(200).send(idRecipe)
     } else {
         const response = await Recipe.findAll({
@@ -121,18 +117,23 @@ router.get('/:id', async (req, res) => {  //GET /recipes/{idReceta}
 })  
 
 router.post('/', async (req, res) => {    //POST /recipe
-    const { title, summary, spoonacularScore, healthScore, analyzedInstructions, diets } = req.body;
+    const { title, summary, spoonacularScore, healthScore, analyzedInstructions, readyInMinutes, servings, cuisines, image, diets } = req.body;
 
     if(title && summary){   //Posiblemente se pueda reemplazar con TRY CATCH
+        
         const newRecipe = await Recipe.create({
                 title,
                 summary,
                 spoonacularScore,
                 healthScore,
-                analyzedInstructions
+                analyzedInstructions,
+                readyInMinutes,
+                servings,
+                cuisines,
+                image
         })
         
-        const dietsDB = await Diet.findAll({
+        const dietsDB = await Diet.findAll({ //adddiets con arreglo de id
             where: {name: diets}
         })
 

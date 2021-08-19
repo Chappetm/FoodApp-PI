@@ -44,7 +44,7 @@ export default function reducer(state = initialState, action){
                 diets: action.payload
             }
         case FILTER_BY_DIET: 
-            const allRecipes = state.allRecipes
+            const allRecipes = state.recipesLoaded
             const mp = allRecipes.map(d => {
                 if(typeof d.diets[0] === 'object'){
                     return {

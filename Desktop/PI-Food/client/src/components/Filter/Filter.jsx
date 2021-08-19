@@ -63,8 +63,8 @@ export default function Filter({setCurrentPage, setOrder}) {
                 <Option value='desc'>Z-A</Option>
             </Select>
             <Select onChange={(e) => {handleSortScore(e)}}>
-                <Option value='asc'>Score ↑</Option>
-                <Option value='desc'>Score ↓</Option>
+                <Option value='asc'>Score 0 - 100</Option>
+                <Option value='desc'>Score 100 - 0</Option>
             </Select>
         </DivSelect>
     )

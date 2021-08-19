@@ -20,11 +20,7 @@ router.get('/', async (req, res) => {  // GET /diet
 
         const dietasFiltradas = dietasUnidas.filter((d, index) => { 
             return dietasUnidas.indexOf(d) === index   //busca el primer indice de la dieta 'd' en el arreglo dietasUnidas y se fija que coincida con el index para devolverlo
-        }) //[9 dietas, falta vegetarian]
-
-        console.log('AAAAAAAAAAAAAAAAAAAA', dietasFiltradas)
-
-        dietasFiltradas.push('vegetarian');  //vegetarian no lo trae la api
+        }) 
 
         await dietasFiltradas.forEach(d => {
             Diet.create({

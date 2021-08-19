@@ -371,7 +371,7 @@ export default function Create() {
                                 <span>0</span>
                                 <DivLabel>
                                     <InputRange name='spoonacularScore' value='0' min="0" max="100" type="range" placeholder='Score:' id='spoonacularScore' value={info.spoonacularScore} onChange={(e) => handleChange(e)}/>
-                                    <Label for='spoonacularScore'>Score</Label>
+                                    <Label for='spoonacularScore'>Score: {info.spoonacularScore}</Label>
                                 </DivLabel>
                                 <span>100</span>
                             </DivRange>
@@ -380,7 +380,7 @@ export default function Create() {
                                 <span>0</span>
                                 <DivLabel>
                                     <InputRange name='healthScore' value='0' type="range" min="0" max="100" placeholder='Health Score:' id='health' value={info.healthScore} onChange={(e) => handleChange(e)}/>
-                                    <Label for='health'>Health Score</Label>
+                                    <Label for='health'>Health Score: {info.healthScore}</Label>
                                 </DivLabel>
                                 <span>100</span>
                             </DivRange>

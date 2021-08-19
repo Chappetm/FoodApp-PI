@@ -26,6 +26,18 @@ module.exports = (sequelize) => {
     },
     analyzedInstructions: {
       type: DataTypes.TEXT
+    },
+    readyInMinutes: {
+      type: DataTypes.INTEGER
+    },
+    servings: {
+      type: DataTypes.INTEGER
+    },
+    cuisines: {
+      type: DataTypes.TEXT
+    },
+    image: {
+      type: DataTypes.TEXT
     }
   });
 };
